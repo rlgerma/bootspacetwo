@@ -1,19 +1,21 @@
 import React, { Fragment } from "react";
-import Info from "../components/Info";
+import { UserContext } from "../providers/UserProvider";
+import { auth } from "../utils/firebase";
 import friend from "../images/friends/friend.jpg";
 
 const Profile = () => {
+  const user = useContext(UserContext);
+  const { photoURL, displayName, email } = user;
   return (
     <Fragment>
       <div className="main">
         <div className="left">
           <div className="profile">
             <div className="profilePicture">
-              <h2 className="userName">Dingus</h2>
+              <h2 className="userName">{displayName}</h2>
               <div className="profilePic">
                 <img src={"#"} alt="Profile" style={{ width: "250px" }} />
               </div>
-              <Info />
               <p>
                 View My:
                 <br />
@@ -35,7 +37,7 @@ const Profile = () => {
             </div>
             <div className="contact">
               <h3>
-                Contacting <span className="userName"></span>
+                Contacting <span className="userName">{email}</span>
               </h3>
               <div className="contactNav">
                 <ul>

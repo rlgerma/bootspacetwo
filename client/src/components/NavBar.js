@@ -40,7 +40,7 @@ const NavBar = () => {
           <NavLink to="/friends"> Friends </NavLink>
           <NavLink to="/music"> Music </NavLink>
           <NavLink to="/news"> Bootspace News </NavLink>
-          <NavLink to="#">LogOut</NavLink>
+          <NavLink to="/signin">Login</NavLink>
         </div>
       </header>
     </Container>
