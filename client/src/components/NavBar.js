@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "@reach/router";
 import logo from "../images/boot.png";
 import { Container, Row } from "reactstrap";
 
@@ -31,16 +31,16 @@ const NavBar = () => {
           </div>
         </Row>
         <div className="nav">
-          <NavLink tag={NavLink} to="/">
+          <Link to="/">
             <u>Home</u>
-          </NavLink>
+          </Link>
 
-          <NavLink to="/mail"> Mail </NavLink>
-          <NavLink to="/profile"> Profile </NavLink>
-          <NavLink to="/friends"> Friends </NavLink>
-          <NavLink to="/music"> Music </NavLink>
-          <NavLink to="/news"> Bootspace News </NavLink>
-          <NavLink to="/signin">Login</NavLink>
+          <Link to="/mail"> Mail </Link>
+          <Link to="/profile"> Profile </Link>
+          <Link to="/friends"> Friends </Link>
+          <Link to="/music"> Music </Link>
+          <Link to="/news"> Bootspace News </Link>
+          <Link to="/login">Login</Link>
         </div>
       </header>
     </Container>

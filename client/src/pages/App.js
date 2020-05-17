@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router } from "@reach/router";
 import { Container } from "reactstrap";
 import Home from "./Home";
 import Profile from "./Profile";
-import SignIn from "./SignIn"
+import SignIn from "./SignIn";
 import News from "./News";
 import Music from "./Music";
 import NavBar from "../components/NavBar";
@@ -16,19 +16,16 @@ function App() {
   return user ? (
     <Profile />
   ) : (
-    <Router>
-      <Container>
-        <NavBar />
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path={["/profile"]} component={Profile} />
-          <Route path="/news" component={News} />
-          <Route path="/music" component={Music} />
-          <Route path="/login" component={SignIn} />
-        </Switch>
-        <Footer />
-      </Container>
-    </Router>
+    <Container>
+      <NavBar />
+      <Router>
+        <Home path="/" />
+        <News path="/news" />
+        <Music path="/music" />
+        <SignIn path="/login" />
+      </Router>
+      <Footer />
+    </Container>
   );
 }
 
