@@ -21,6 +21,7 @@ function App() {
       <Router>
         <Home path="/" />
         <News path="/news" />
+        <Profile path="/profile" />
         <Music path="/music" />
         <SignIn path="/login" />
       </Router>

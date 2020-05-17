@@ -4,7 +4,7 @@ import friend from "../images/friends/friend.jpg";
 
 const Profile = () => {
   const user = useContext(UserContext);
-  const { displayName, email } = user;
+  const { displayName, email, photoURL, metadata } = user;
   return (
     <div className="main">
       <div className="left">
@@ -12,7 +12,7 @@ const Profile = () => {
           <div className="profilePicture">
             <h2 className="userName">{displayName}</h2>
             <div className="profilePic">
-              <img src={"#"} alt="Profile" style={{ width: "250px" }} />
+              <img src={photoURL} alt="Profile" style={{ width: "250px" }} />
             </div>
             <p>
               View My:
@@ -29,7 +29,7 @@ const Profile = () => {
             <div className="onlineNow">Online Now!</div>
             <div className="lastLogin">
               <p>
-                Last Login: <span id="lastLog"></span>
+                Last Login: <span id="lastLog">{metadata.lastSignInTime}</span>
               </p>
             </div>
           </div>
@@ -150,12 +150,12 @@ const Profile = () => {
           </div>
           <div className="userUrl">
             <h4>GitHub URL:</h4>
-            <a href="/">poop</a>
+            <a href="/"></a>
           </div>
         </div>
         <div className="userDetails">
           <h3>
-            <span className="userName"></span>'s Details
+            <span className="userName">{displayName}</span>'s Details
           </h3>
           Status:
           <br />
@@ -164,17 +164,18 @@ const Profile = () => {
       <div className="right">
         <div className="network">
           <h4>
-            <span className="userName"></span> is in your extended network
+            <span className="userName">{displayName}</span> is in your extended
+            network
           </h4>
         </div>
         <div className="blog">
           <p style={{ fontWeight: "bold" }}>
-            <span className="userName"></span>'s latest blog entry [
-            <a href="/">Subscribe to this blog]</a>
+            <span className="userName">{displayName}</span>'s latest blog entry
+            [<a href="/">Subscribe to this blog]</a>
           </p>
           <p>
             <a href="/">
-              <span className="userName"></span>'s first blog entry
+              <span className="userName">{displayName}</span>'s first blog entry
             </a>
           </p>
           <p>
@@ -184,10 +185,10 @@ const Profile = () => {
       </div>
       <div className="friends">
         <h3>
-          <span className="userName"></span>'s Friend Space
+          <span className="userName">{displayName}</span>'s Friend Space
         </h3>
         <p style={{ fontWeight: "bold", marginLeft: 10 + "px" }}>
-          <span className="userName"></span> has 8 friends.
+          <span className="userName">{displayName}</span> has 8 friends.
         </p>
         <div className="top8">
           <div>
