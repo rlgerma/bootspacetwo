@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Router } from "@reach/router";
 import { Container } from "reactstrap";
+import { UserContext } from "../providers/UserProvider";
 import Home from "./Home";
 import Profile from "./Profile";
 import SignIn from "./SignIn";
@@ -10,9 +11,8 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../styles/bootspace.css";
 
-function App() {
-  const user = null;
-
+function Application() {
+  const user = useContext(UserContext);
   return user ? (
     <Profile />
   ) : (
@@ -30,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default Application;

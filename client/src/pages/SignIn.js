@@ -1,32 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "@reach/router";
-import { signInWithGithub } from "../utils/firebase";
-const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [error, setError] = useState(null);
-  const createUserWithEmailAndPasswordHandler = (event, email, password) => {
-    event.preventDefault();
-    setEmail("");
-    setPassword("");
-    setDisplayName("");
-  };
-  const onChangeHandler = (event) => {
-    const { name, value } = event.currentTarget;
-    if (name === "userEmail") {
-      setEmail(value);
-    } else if (name === "userPassword") {
-      setPassword(value);
-    } else if (name === "displayName") {
-      setDisplayName(value);
-    }
-  };
+import { auth, signInWithGithub, generateUserDocument } from "../firebase";
+
+const SignIn = () => {
   return (
     <div className="mt-8">
       <h1 className="text-center bold">Sign Up with GitHub!</h1>
 
-      <button className="red center" onClick={signInWithGithub}>
+      <button
+        className="red center"
+        onClick={() => {
+          try {
+            signInWithGithub();
+          } catch (error) {
+            console.error("Error signing in with Google", error);
+          }
+        }}
+      >
         Sign In with GitHub
       </button>
       <p className="text-center my-3">
@@ -38,4 +28,4 @@ const SignUp = () => {
     </div>
   );
 };
-export default SignUp;
+export default SignIn;

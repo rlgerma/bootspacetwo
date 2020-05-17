@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
+import { navigate } from "@reach/router";
+import { auth } from "../firebase";
 import friend from "../images/friends/friend.jpg";
 
 const Profile = () => {
   const user = useContext(UserContext);
-  const { displayName, email, photoURL, metadata } = user;
+  const { photoURL, displayName, email } = user;
+  console.log(user);
   return (
     <div className="main">
       <div className="left">
@@ -29,7 +32,7 @@ const Profile = () => {
             <div className="onlineNow">Online Now!</div>
             <div className="lastLogin">
               <p>
-                Last Login: <span id="lastLog">{metadata.lastSignInTime}</span>
+                Last Login: <span id="lastLog"></span>
               </p>
             </div>
           </div>
