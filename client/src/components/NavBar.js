@@ -40,7 +40,7 @@ const NavBar = () => {
           <Link to="/friends"> Friends </Link>
           <Link to="/music"> Music </Link>
           <Link to="/news"> Bootspace News </Link>
-          <Link to="/login">Login</Link>
+          <Link to="/signin">Login</Link>
         </div>
       </header>
     </Container>

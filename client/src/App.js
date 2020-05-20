@@ -1,11 +1,17 @@
 import React from "react";
-import { Router } from "@reach/router";
+import { Container } from "reactstrap";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import Application from "./pages/Application";
-import UserProvider, { UserContext } from "./providers/UserProvider";
+import UserProvider from "./providers/UserProvider";
 function App() {
   return (
     <UserProvider>
-      <Application />
+      <Container>
+        <NavBar />
+        <Application />
+        <Footer />
+      </Container>
     </UserProvider>
   );
 }

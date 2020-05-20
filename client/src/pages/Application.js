@@ -1,32 +1,33 @@
 import React, { useContext } from "react";
 import { Router } from "@reach/router";
-import { Container } from "reactstrap";
 import { UserContext } from "../providers/UserProvider";
 import Home from "./Home";
+import UseHome from "./UseHome";
 import Profile from "./Profile";
-import SignIn from "./SignIn";
 import News from "./News";
 import Music from "./Music";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
+import PasswordReset from "../components/PasswordReset";
+
 import "../styles/bootspace.css";
 
 function Application() {
   const user = useContext(UserContext);
   return user ? (
-    <Profile />
+    <Router>
+      <UseHome path="/home" />
+      <Profile path="/profile" />
+      <News path="/news" />
+      <Music path="/music" />
+    </Router>
   ) : (
-    <Container>
-      <NavBar />
-      <Router>
-        <Home path="/" />
-        <News path="/news" />
-        <Profile path="/profile" />
-        <Music path="/music" />
-        <SignIn path="/login" />
-      </Router>
-      <Footer />
-    </Container>
+    <Router>
+      <Home path="/" />
+      <SignIn path="/signin" />
+      <SignUp path="/signUp" />
+      <PasswordReset path="/passwordreset" />
+    </Router>
   );
 }
 

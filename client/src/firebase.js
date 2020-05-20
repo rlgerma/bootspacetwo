@@ -4,25 +4,45 @@ import "firebase/firestore";
 import { functions } from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDGCSr8j-FgTP6jmHEIoYtddQC4zg5F_4s",
-  authDomain: "bootspace-6a443.firebaseapp.com",
-  databaseURL: "https://bootspace-6a443.firebaseio.com",
-  projectId: "bootspace-6a443",
-  storageBucket: "bootspace-6a443.appspot.com",
-  messagingSenderId: "654838828145",
-  appId: "1:654838828145:web:7f2ad8655473e135a0dfd0",
-  measurementId: "G-VW08PGN0M4",
+  apiKey: "AIzaSyB1PO7YYmlrQwMYWcqBfUHoG_YaS4E8Oho",
+  authDomain: "bootspacetwo.firebaseapp.com",
+  databaseURL: "https://bootspacetwo.firebaseio.com",
+  projectId: "bootspacetwo",
+  storageBucket: "bootspacetwo.appspot.com",
+  messagingSenderId: "603883173363",
+  appId: "1:603883173363:web:421518b00f1af92ff1ce86",
+  measurementId: "G-XVN7LR9ZBJ",
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
-  auth.signInWithPopup(provider);
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
 };
 
 export const generateUserDocument = async (user, additionalData) => {

@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
-import { navigate } from "@reach/router";
 import { auth } from "../firebase";
 import friend from "../images/friends/friend.jpg";
 
 const Profile = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email } = user;
-  console.log(user);
   return (
     <div className="main">
       <div className="left">
@@ -22,6 +20,14 @@ const Profile = () => {
               <br />
               <a href="/">Gists</a> | <a href="/">Repos</a>
             </p>
+            <button
+              className="w-full py-3 bg-red-600 mt-4 text-white"
+              onClick={() => {
+                auth.signOut();
+              }}
+            >
+              Sign out
+            </button>
           </div>
           <div className="profileInfo">
             <span className="tagline"></span>
@@ -153,7 +159,6 @@ const Profile = () => {
           </div>
           <div className="userUrl">
             <h4>GitHub URL:</h4>
-            <a href="/"></a>
           </div>
         </div>
         <div className="userDetails">
