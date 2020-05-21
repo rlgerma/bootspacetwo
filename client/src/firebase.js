@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { functions } from "firebase";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB1PO7YYmlrQwMYWcqBfUHoG_YaS4E8Oho",
@@ -14,35 +13,14 @@ const firebaseConfig = {
   measurementId: "G-XVN7LR9ZBJ",
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
+firebase.firestore().settings({ experimentalForceLongPolling: true });
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(function(result) {
-      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
-    })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
+  auth.signInWithPopup(provider);
 };
 
 export const generateUserDocument = async (user, additionalData) => {
@@ -52,13 +30,12 @@ export const generateUserDocument = async (user, additionalData) => {
   const snapshot = await userRef.get();
 
   if (!snapshot.exists) {
-    const { email, displayName, photoURL, metadata } = user;
+    const { email, displayName, photoURL } = user;
     try {
       await userRef.set({
         displayName,
         email,
         photoURL,
-        metadata,
         ...additionalData,
       });
     } catch (error) {

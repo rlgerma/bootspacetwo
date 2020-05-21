@@ -2,6 +2,7 @@ import React, { Component, createContext } from "react";
 import { auth, generateUserDocument } from "../firebase";
 
 export const UserContext = createContext({ user: null });
+
 class UserProvider extends Component {
   state = {
     user: null,
@@ -13,6 +14,7 @@ class UserProvider extends Component {
       this.setState({ user });
     });
   };
+
   render() {
     const { user } = this.state;
 
@@ -23,4 +25,5 @@ class UserProvider extends Component {
     );
   }
 }
+
 export default UserProvider;

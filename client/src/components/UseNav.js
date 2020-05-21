@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "@reach/router";
 import logo from "../images/boot.png";
 import { Container, Row } from "reactstrap";
-import { UserContext } from "../providers/UserProvider";
-
+import { auth } from "../firebase";
 const NavBar = () => {
-  const user = useContext(UserContext);
-
   return (
     <Container>
       <header>
@@ -34,15 +31,23 @@ const NavBar = () => {
           </div>
         </Row>
         <div className="nav" id="nav">
-          <Link to="/">
+          <Link to="/home">
             <u>Home</u>
           </Link>
+
           <Link to="/mail"> Mail </Link>
           <Link to="/profile"> Profile </Link>
           <Link to="/friends"> Friends </Link>
           <Link to="/music"> Music </Link>
           <Link to="/news"> Bootspace News </Link>
-          <Link to="/signin">Login</Link>
+          <Link
+            to="/"
+            onClick={() => {
+              auth.signOut();
+            }}
+          >
+            Log out
+          </Link>
         </div>
       </header>
     </Container>
