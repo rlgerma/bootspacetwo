@@ -1,52 +1,70 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "@reach/router";
-import logo from "../images/bsLogo.jpeg";
+import logo from "../images/icon.png";
 import { auth } from "../firebase";
-const NavBar = () => {
+import { Input, Select, AutoComplete } from "antd";
+import { UserContext } from "../providers/UserProvider";
+const UseNav = () => {
+  const user = useContext(UserContext);
+
+  const { Option } = Select;
+
+  const options = [
+    {
+      value: "searchTerm",
+      label: "Search for",
+      children: [
+        {
+          value: "posts",
+          label: "posts",
+        },
+        {
+          value: "users",
+          label: "users",
+        },
+        {
+          value: "groups",
+          label: "groups",
+        },
+      ],
+    },
+  ];
   return (
     <header>
       <div className="navLogo">
-        <img src={logo} alt="bootspace" />
-      </div>
-      <div className="search">
-        <input type="text" placeholder={"Search on BootSpace!"} />
-        <select>
-          <option>Web</option>
-          <option>Bootspace</option>
-        </select>
-        <button>Search</button>
-        <button id="menuToggle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
-          </svg>
-        </button>
-      </div>
-      <div className="nav" id="nav">
-        <Link to="/home">
-          <u>Home</u>
-        </Link>
-
-        <Link to="/mail"> Mail </Link>
-        <Link to="/profile"> Profile </Link>
-        <Link to="/friends"> Friends </Link>
-        <Link to="/music"> Music </Link>
-        <Link to="/news"> Bootspace News </Link>
-        <Link
-          to="/"
-          onClick={() => {
-            auth.signOut();
-          }}
-        >
-          Log out
-        </Link>
+        <div className="headLeft">
+          <img src={logo} alt="bootspace" className="icon" />
+          <h2 className="logo"> | BootSpace</h2>
+        </div>
+        <div className="headRight">
+          <Input.Group compact>
+            <AutoComplete
+              style={{ width: "50%", textAlign: "right", margin: "0" }}
+              placeholder="Search for"
+            />
+            <Select defaultValue="Posts">
+              <Option value="Posts">Posts</Option>
+              <Option value="Users">Users</Option>
+              <Option value="Groups">Groups</Option>
+            </Select>
+          </Input.Group>
+          <div className="navLinks">
+            <Link to="/home">home</Link>
+            <Link to="/profile"> profile </Link>
+            <Link to="/blog"> blog </Link>
+            <Link
+              to="/"
+              onClick={() => {
+                auth.signOut();
+              }}
+            >
+              log-out
+            </Link>
+          </div>
+        </div>
       </div>
     </header>
   );
 };
 
-export default NavBar;
+export default UseNav;

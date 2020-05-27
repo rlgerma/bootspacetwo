@@ -1,6 +1,32 @@
 .navLogo {
-  img {
-    width: 25em;
-    height: auto;
+  width: 100%;
+  background-color: #f5f410;
+  line-height: 5em;
+  .headLeft {
+    width: 30%;
+    font-size: 2rem;
+    font-family: lato, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    display: -webkit-box;
+    float: left;
+    img.icon {
+      width: 3rem;
+      margin: 0 1rem;
+    }
+  }
+  .headRight {
+    width: 30%;
+    margin: 1em auto;
+    float: right;
+    text-align: center;
+    .navLinks {
+      word-spacing: 1em;
+      font-family: lato, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.2em;
+      margin: 0 auto;
+    }
   }
 }
