@@ -7,9 +7,6 @@ import UseNav from "../components/UseNav";
 import NavBar from "../components/NavBar";
 import Profile from "./Profile";
 import SignIn from "../components/SignIn";
-import SignUp from "../components/SignUp";
-import PasswordReset from "../components/PasswordReset";
-import "../styles/bootspace.css";
 
 function Application() {
   const user = useContext(UserContext);
@@ -26,10 +23,7 @@ function Application() {
       <NavBar />
       <Router>
         <Home path="/" />
-        <SignUp path="/signUp" />
         <SignIn path="/signin" />
-
-        <PasswordReset path="/passwordReset" />
       </Router>
     </>
   );
