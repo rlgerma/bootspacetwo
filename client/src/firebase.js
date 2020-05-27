@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import { navigate } from "@reach/router";
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -28,6 +29,8 @@ export const signInWithGithub = () => {
       // The signed-in user info.
       var user = result.user;
       // ...
+      navigate("/home");
+      window.location.reload();
     })
     .catch(function(error) {
       // Handle Errors here.

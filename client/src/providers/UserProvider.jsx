@@ -1,5 +1,4 @@
 import React, { Component, createContext } from "react";
-import { redirectTo } from "@reach/router";
 import { auth, generateUserDocument } from "../firebase";
 
 export const UserContext = createContext({ user: null });
@@ -13,7 +12,6 @@ class UserProvider extends Component {
     auth.onAuthStateChanged(async (userAuth) => {
       const user = await generateUserDocument(userAuth);
       this.setState({ user });
-      redirectTo("/home");
     });
   };
 

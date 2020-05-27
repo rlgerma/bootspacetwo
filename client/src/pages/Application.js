@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Router, Redirect } from "@reach/router";
+import { Router } from "@reach/router";
 import { UserContext } from "../providers/UserProvider";
 import Home from "./Home";
 import UseHome from "./UseHome";
