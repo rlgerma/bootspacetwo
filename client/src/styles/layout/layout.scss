@@ -1,6 +1,8 @@
 // import components
 @import "./components/Navbar.scss";
 @import "./components/Footer.scss";
+@import "./components/Profile.scss";
+
 // Main Style Imports
 body {
   width: 100%;
@@ -9,4 +11,5 @@ body {
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
+  background-color: #466680;
 }

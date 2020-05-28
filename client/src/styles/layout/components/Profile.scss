@@ -1,0 +1,84 @@
+.profileCard {
+
+    text-align: center;
+
+    img {
+        margin: 0 auto;
+        width: 90%;
+        border: 2px outset #000000;
+        transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+        -o-transition: 0.2s ease all;
+
+        &:hover {
+            cursor: pointer;
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+    }
+
+
+
+    .ant-card-head {
+        background-color: #40a9ff;
+
+
+        .ant-card-head-title {
+            font-family: lato, sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 2em;
+            color: #000;
+        }
+
+    }
+
+    .ant-card-body {}
+}
+
+.infoCard {
+    .ant-card-head {
+        background-color: #40a9ff;
+
+        .ant-card-head-title {
+            font-family: lato, sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 2em;
+            color: #000;
+
+        }
+
+    }
+
+    .ant-card-body {}
+}
+
+.underCard {
+    .ant-card-head {
+        background-color: rgb(242, 242, 242);
+
+        .ant-card-head-title {
+            font-family: lato, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1em;
+            color: #000;
+            text-align: center;
+
+        }
+
+    }
+
+    .ant-card-body {
+        text-align: right;
+        background-color: #fff;
+
+        .underCardLinks {
+            text-align: center;
+            line-height: 2em;
+        }
+    }
+
+}

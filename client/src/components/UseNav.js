@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import logo from "../images/icon.png";
 import { auth } from "../firebase";
-import { Input, Select, AutoComplete } from "antd";
+import { Input, Select, AutoComplete, Divider } from "antd";
 const UseNav = () => {
   const { Option } = Select;
 
@@ -60,6 +60,7 @@ const UseNav = () => {
           </div>
         </div>
       </div>
+      <Divider style={{ color: "#466680", width: 500 }} />
     </header>
   );
 };
