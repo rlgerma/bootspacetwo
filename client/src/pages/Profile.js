@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
+import { Link } from "@reach/router";
 import { UserContext } from "../providers/UserProvider";
-import friend from "../images/friends/friend.jpg";
 
 const Profile = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email } = user;
+  const userData = JSON.parse(localStorage.getItem("bootSpaceUser"));
+
   return (
     <div className="main">
       <div className="left">
@@ -15,32 +17,33 @@ const Profile = () => {
               <img src={photoURL} alt="Profile" style={{ width: "250px" }} />
             </div>
             <p>
-              View My:
+              Website: {userData.blog}
               <br />
-              <a href="/">Gists</a> | <a href="/">Repos</a>
+              <a href={`https://github.com/${userData.login}?tab=repositories`}>
+                Repos
+              </a>{" "}
+              | <a href={`https://gist.github.com/${userData.login}`}>Gists</a>
             </p>
           </div>
           <div className="profileInfo">
-            <span className="tagline"></span>
-            <p>Male</p>
-            <p>28 years old</p>
-            <p>Denver, Colorado</p>
-            <p>United States</p>
-            <div className="onlineNow">Online Now!</div>
+            <span className="tagline">{userData.bio}</span>
+
+            <p>{userData.location}</p>
             <div className="lastLogin">
               <p>
-                Last Login: <span id="lastLog"></span>
+                Last Login:{" "}
+                <span className="lastLog">{userData.lastUpdate}</span>
               </p>
             </div>
           </div>
           <div className="contact">
             <h3>
-              Contacting <span className="userName">{email}</span>
+              Contacting <span className="userName">{displayName}</span>
             </h3>
             <div className="contactNav">
               <ul>
                 <li>
-                  <a href="/">
+                  <a href={`mailTo:${email}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -49,11 +52,11 @@ const Profile = () => {
                     >
                       <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z" />
                     </svg>
-                    Send Message
+                    Send email
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -66,7 +69,7 @@ const Profile = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -79,7 +82,7 @@ const Profile = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -94,7 +97,7 @@ const Profile = () => {
               </ul>
               <ul>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -110,97 +113,22 @@ const Profile = () => {
             </div>
           </div>
           <div className="userUrl">
-            <h4>GitHub URL:</h4>
+            <h4>
+              GitHub URL:{" "}
+              <Link to={userData.profileUrl}>{userData.profileUrl}</Link>
+            </h4>
           </div>
         </div>
-        <div className="userDetails">
-          <h3>
-            <span className="userName">{displayName}</span>'s Details
-          </h3>
-          Status:
-          <br />
-        </div>
       </div>
-      <div className="right">
-        <div className="blog">
-          <p style={{ fontWeight: "bold" }}>
-            <span className="userName">{displayName}</span>'s latest blog entry
-            [<a href="/">Subscribe to this blog]</a>
-          </p>
-          <p>
-            <a href="/">
-              <span className="userName">{displayName}</span>'s first blog entry
-            </a>
-          </p>
-          <p>
-            [<a href="/">View All Blog Entries</a>]
-          </p>
-        </div>
-      </div>
+
       <div className="friends">
         <h3>
           <span className="userName">{displayName}</span>'s Friend Space
         </h3>
         <p style={{ fontWeight: "bold", marginLeft: 10 + "px" }}>
-          <span className="userName">{displayName}</span> has 8 friends.
+          <span className="userName">{displayName}</span> has{" "}
+          {userData.followers} followers on GitHub.
         </p>
-        <div className="top8">
-          <div>
-            <a href="/">
-              Bubbles
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              Finn
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              Louie
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              Macc
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              Zeke
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              Calypso
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              Zeke 2<br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-          <div>
-            <a href="/">
-              CoolDog420
-              <br />
-              <img src={friend} alt="friend" />
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );

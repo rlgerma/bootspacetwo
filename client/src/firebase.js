@@ -21,27 +21,31 @@ export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
-  auth
-    .signInWithPopup(provider)
-    .then(function(result) {
-      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
-      navigate("/home");
-      window.location.reload();
-    })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
+  auth.signInWithPopup(provider).then(function(result) {
+    var userData = {
+      login: result.additionalUserInfo.profile.login,
+      bio: result.additionalUserInfo.profile.bio,
+      repos: result.additionalUserInfo.profile.public_repos,
+      reposUrl: result.additionalUserInfo.profile.repos_url,
+      followers: result.additionalUserInfo.profile.followers,
+      followersUrl: result.additionalUserInfo.profile.followers_url,
+      following: result.additionalUserInfo.profile.following,
+      location: result.additionalUserInfo.profile.location,
+      profileUrl: result.additionalUserInfo.profile.html_url,
+      blog: result.additionalUserInfo.profile.blog,
+      name: result.additionalUserInfo.profile.name,
+      gists: result.additionalUserInfo.profile.gists_url,
+      createdAt: result.additionalUserInfo.profile.created_at,
+      company: result.additionalUserInfo.profile.company,
+      hireable: result.additionalUserInfo.profile.hireable,
+      lastUpdate: result.additionalUserInfo.profile.updated_at,
+    };
+
+    localStorage.setItem("bootSpaceUser", JSON.stringify(userData));
+
+    window.location.reload();
+    navigate("/home");
+  });
 };
 
 export const generateUserDocument = async (user, additionalData) => {
@@ -80,3 +84,20 @@ const getUserDocument = async (uid) => {
     console.error("Error fetching user", error);
   }
 };
+
+// export const getUserInfo = async (...user) => {
+//   axios.get(`https://api.github.com/users/${user}`).then(function(res) {
+//     let info = {
+//       followers: res.data.followers,
+//       following: res.data.following,
+//       repos: res.data.public_repos,
+//       location: res.data.location,
+//       profilePic: res.data.avatar_url,
+//       profileUrl: res.data.html_url,
+//       blog: res.data.blog,
+//       bio: res.data.bio,
+//       name: res.data.name,
+//     };
+//     console.log(info);
+//   });
+// };

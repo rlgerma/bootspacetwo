@@ -4,7 +4,7 @@ import UserProvider from "./providers/UserProvider";
 import { Layout } from "antd";
 import "./styles/App.scss";
 function App() {
-  const { Header, Content, Footer } = Layout;
+  const { Footer } = Layout;
   return (
     <Layout className="layout">
       <UserProvider>

@@ -1,34 +1,31 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "@reach/router";
 import logo from "../images/icon.png";
 import { Input, Select, AutoComplete } from "antd";
-import { UserContext } from "../providers/UserProvider";
 
 const NavBar = () => {
-  const user = useContext(UserContext);
-
   const { Option } = Select;
 
-  const options = [
-    {
-      value: "searchTerm",
-      label: "Search for",
-      children: [
-        {
-          value: "posts",
-          label: "posts",
-        },
-        {
-          value: "users",
-          label: "users",
-        },
-        {
-          value: "groups",
-          label: "groups",
-        },
-      ],
-    },
-  ];
+  // const options = [
+  //   {
+  //     value: "searchTerm",
+  //     label: "Search for",
+  //     children: [
+  //       {
+  //         value: "posts",
+  //         label: "posts",
+  //       },
+  //       {
+  //         value: "users",
+  //         label: "users",
+  //       },
+  //       {
+  //         value: "groups",
+  //         label: "groups",
+  //       },
+  //     ],
+  //   },
+  // ];
   return (
     <header>
       <div className="navLogo">
