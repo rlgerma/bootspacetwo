@@ -56,11 +56,14 @@ export const generateUserDocument = async (user, additionalData) => {
 
   if (!snapshot.exists) {
     const { email, displayName, photoURL } = user;
+    const userData = JSON.parse(localStorage.getItem("bootSpaceUser"));
+
     try {
       await userRef.set({
         displayName,
         email,
         photoURL,
+        userData,
         ...additionalData,
       });
     } catch (error) {
@@ -84,20 +87,3 @@ const getUserDocument = async (uid) => {
     console.error("Error fetching user", error);
   }
 };
-
-// export const getUserInfo = async (...user) => {
-//   axios.get(`https://api.github.com/users/${user}`).then(function(res) {
-//     let info = {
-//       followers: res.data.followers,
-//       following: res.data.following,
-//       repos: res.data.public_repos,
-//       location: res.data.location,
-//       profilePic: res.data.avatar_url,
-//       profileUrl: res.data.html_url,
-//       blog: res.data.blog,
-//       bio: res.data.bio,
-//       name: res.data.name,
-//     };
-//     console.log(info);
-//   });
-// };

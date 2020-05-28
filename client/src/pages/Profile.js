@@ -4,8 +4,7 @@ import { UserContext } from "../providers/UserProvider";
 
 const Profile = () => {
   const user = useContext(UserContext);
-  const { photoURL, displayName, email } = user;
-  const userData = JSON.parse(localStorage.getItem("bootSpaceUser"));
+  const { photoURL, displayName, email, userData } = user;
 
   return (
     <div className="main">
