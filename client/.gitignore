@@ -1,11 +1,7 @@
-package-lock.json
-node_modules
-src/firebase.js
-.firebase
+/build
+/functions
+/.firebase
 .firebaserc
-firebase-debug.log
 firebase.json
-firestore.rules
+package-lock.json
 storage.rules
-build
-functions

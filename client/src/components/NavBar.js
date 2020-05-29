@@ -6,26 +6,6 @@ import { Input, Select, AutoComplete } from "antd";
 const NavBar = () => {
   const { Option } = Select;
 
-  // const options = [
-  //   {
-  //     value: "searchTerm",
-  //     label: "Search for",
-  //     children: [
-  //       {
-  //         value: "posts",
-  //         label: "posts",
-  //       },
-  //       {
-  //         value: "users",
-  //         label: "users",
-  //       },
-  //       {
-  //         value: "groups",
-  //         label: "groups",
-  //       },
-  //     ],
-  //   },
-  // ];
   return (
     <header>
       <div className="navLogo">
