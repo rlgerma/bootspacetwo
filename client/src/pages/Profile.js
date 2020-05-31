@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Card, Row, Col, Divider, Space } from "antd";
 import { Link } from "@reach/router";
 import { UserContext } from "../providers/UserProvider";
@@ -6,25 +6,6 @@ import { UserContext } from "../providers/UserProvider";
 const Profile = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email, userData } = user;
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    fetch(userData.followersUrl)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.items);
-          localStorage.setItem("friends", JSON.stringify(result));
-        },
-
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, []);
   const friendData = JSON.parse(localStorage.getItem("friends"));
 
   return (
@@ -45,30 +26,15 @@ const Profile = () => {
               <div className="underCardLinks">
                 <Divider plain>Contact {displayName}</Divider>
 
-                <a href={`mailTo:${email}`}>
-                  <br />
-                  Send email
-                </a>
+                <a href={`mailTo:${email}`}>Send email</a>
 
-                <a href="/#">
-                  <br />
-                  Add to Friends
-                </a>
+                <a href="/#">Add to Friends</a>
 
-                <a href="/#">
-                  <br />
-                  Instant Message
-                </a>
+                <a href="/#">Instant Message</a>
 
-                <a href="/#">
-                  <br />
-                  Add to Group
-                </a>
+                <a href="/#">Add to Group</a>
 
-                <a href="/#">
-                  <br />
-                  Block User
-                </a>
+                <a href="/#">Block User</a>
               </div>
             </Card>{" "}
           </Col>
