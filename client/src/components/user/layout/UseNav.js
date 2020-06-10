@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "@reach/router";
-import logo from "../images/icon.png";
-import { auth } from "../firebase";
+import logo from "../../../images/icon.png";
+import { auth } from "../../../firebase";
+import {
+  HomeOutlined,
+  UserOutlined,
+  ReadOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { Input, Select, AutoComplete, Divider } from "antd";
 const UseNav = () => {
   const { Option } = Select;
@@ -26,15 +32,25 @@ const UseNav = () => {
             </Select>
           </Input.Group>
           <div className="navLinks">
-            <Link to="/home">home</Link>
-            <Link to="/profile"> profile </Link>
-            <Link to="/blog"> blog </Link>
+            <Link to="/home">
+              <HomeOutlined />
+              home
+            </Link>
+            <Link to="/profile">
+              <UserOutlined />
+              profile
+            </Link>
+            <Link to="/blog">
+              <ReadOutlined />
+              blog
+            </Link>
             <Link
               to="/"
               onClick={() => {
                 auth.signOut();
               }}
             >
+              <LogoutOutlined />
               log-out
             </Link>
           </div>

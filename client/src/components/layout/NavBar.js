@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
-import logo from "../images/icon.png";
+import logo from "../../images/icon.png";
+import { HomeOutlined, ReadOutlined, LoginOutlined } from "@ant-design/icons";
 import { Input, Select, AutoComplete } from "antd";
 
 const NavBar = () => {
@@ -27,10 +28,17 @@ const NavBar = () => {
           </Input.Group>
           <div className="navLinks">
             <Link to="/">
-              <u>home</u>
+              <HomeOutlined />
+              home
             </Link>
-            <Link to="/blog"> blog </Link>
-            <Link to="/signin">login</Link>
+            <Link to="/blog">
+              <ReadOutlined />
+              blog
+            </Link>
+            <Link to="/signin">
+              <LoginOutlined />
+              login
+            </Link>
           </div>
         </div>
       </div>

@@ -3,10 +3,10 @@ import { Router } from "@reach/router";
 import { UserContext } from "../providers/UserProvider";
 import Home from "./Home";
 import UseHome from "./UseHome";
-import UseNav from "../components/UseNav";
-import NavBar from "../components/NavBar";
+import UseNav from "../components/user/layout/UseNav";
+import NavBar from "../components/layout/NavBar";
 import Profile from "./Profile";
-import SignIn from "../components/SignIn";
+import SignIn from "../components/user/auth/SignIn";
 
 function Application() {
   const user = useContext(UserContext);
