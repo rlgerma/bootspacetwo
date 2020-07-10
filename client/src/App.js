@@ -5,12 +5,14 @@ import footerImg from "./images/BootSpaceTrans.png";
 import { Layout } from "antd";
 import "./styles/App.scss";
 function App() {
-  const { Footer } = Layout;
+  const { Footer, Content } = Layout;
   return (
     <Layout className="layout">
-      <UserProvider>
-        <Application />
-      </UserProvider>
+      <Content>
+        <UserProvider>
+          <Application />
+        </UserProvider>
+      </Content>
       <Footer className="footer">
         <img src={footerImg} alt="bootspace" />
         <br />

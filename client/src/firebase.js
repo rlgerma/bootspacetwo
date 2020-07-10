@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+// eslint-disable-next-line
 import dotenv from "dotenv";
 import { navigate } from "@reach/router";
 import "firebase/auth";

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, Row, Col } from "antd";
 import { UserContext } from "../providers/UserProvider";
+import PostFeed from "../components/user/dashboard/feed";
 
 const UseHome = () => {
   const user = useContext(UserContext);
@@ -34,7 +35,7 @@ const UseHome = () => {
       <div className="dashboard">
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col className="gutter-row" span={6} offset={1} flex={2}>
-            <Card title={"Posts"} className="postFeed"></Card>
+            <PostFeed />
           </Col>
           <Col className="gutter-row" span={16} flex={3}>
             <Card
