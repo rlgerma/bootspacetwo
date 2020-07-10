@@ -1,4 +1,5 @@
 /build
+.env
 package-lock.json
 storage.rules
 firestore.rules

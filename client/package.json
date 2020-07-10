@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "4.2.4",
     "axios": "^0.18.0",
+    "dotenv": "^8.2.0",
     "firebase": "^7.14.6",
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
