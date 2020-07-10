@@ -1,0 +1,7 @@
+/build
+/functions
+/.firebase
+.firebaserc
+firebase.json
+package-lock.json
+storage.rules
