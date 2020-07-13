@@ -42,7 +42,7 @@ export const signInWithGithub = () => {
       hireable: result.additionalUserInfo.profile.hireable,
       lastUpdate: result.additionalUserInfo.profile.updated_at,
     };
-
+    console.log(result.additionalUserInfo);
     localStorage.setItem("bootSpaceUser", JSON.stringify(userData));
     navigate("/home");
   });

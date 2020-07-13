@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col, Statistic } from "antd";
 import { UserContext } from "../providers/UserProvider";
 import PostFeed from "../components/user/dashboard/feed";
-
+import DashInfo from "../components/user/dashboard/dashInfo";
 const UseHome = () => {
   const user = useContext(UserContext);
   const { displayName, userData } = user;
@@ -44,7 +44,9 @@ const UseHome = () => {
                 .slice(0, -1)
                 .join(" ")}`}
               className="dashCard"
-            ></Card>{" "}
+            >
+              <DashInfo />
+            </Card>{" "}
           </Col>
         </Row>
       </div>
