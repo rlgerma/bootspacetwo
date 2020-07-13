@@ -8,6 +8,7 @@ This is a new version of an old project I started with [Carina Ullman](https://g
 * Migrated from Heroku to Firebase.
 * Updated & minimized dependencies.
 * Integration of cloud functions.
+* headless wordpress CMS for admin blog page
 
 ### Project Updates
 * see [projects](https://github.com/rlgerma92/bootspacetwo/projects) tab
