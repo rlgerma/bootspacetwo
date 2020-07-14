@@ -22,7 +22,7 @@ export default function Blog() {
   return (
     <Content>
       {blog.map((post, index) => (
-        <Row gutter={{ xs: 4 }} key={index}>
+        <Row className="blogRow" key={index}>
           <Card title={post.title.rendered} className="blogCard">
             <p dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
           </Card>

@@ -1,5 +1,5 @@
 import React, { createElement, useEffect, useContext, useState } from "react";
-import { Row, Col, Comment, Tooltip, Avatar } from "antd";
+import { Row, Comment, Tooltip, Avatar } from "antd";
 import { UserContext } from "../../../../providers/UserProvider";
 import moment from "moment";
 import {
@@ -25,6 +25,7 @@ const DashInfo = () => {
           setIsLoaded(true);
           setItems(result.items);
           localStorage.setItem("events", JSON.stringify(result));
+          console.log(result);
         },
 
         (error) => {
@@ -78,7 +79,7 @@ const DashInfo = () => {
               <Comment
                 actions={actions}
                 author={item.id}
-                avatar={<Avatar src={item.org} alt="Han Solo" />}
+                // avatar={<Avatar src={item} alt="Han Solo" />}
                 content={
                   <p>
                     We supply a series of design principles, practical patterns

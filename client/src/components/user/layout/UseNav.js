@@ -13,18 +13,17 @@ const UseNav = () => {
   const { Option } = Select;
 
   return (
-    <header>
-      <div className="navLogo">
-        <div className="headLeft">
+    <nav>
+      <div className="navLeft">
+        <div className="navLogo">
           <img src={logo} alt="bootspace" className="icon" />
           <h2 className="logo"> | BootSpace</h2>
         </div>
-        <div className="headRight">
-          <Input.Group compact>
-            <AutoComplete
-              style={{ width: "50%", textAlign: "right", margin: "0" }}
-              placeholder="Search for"
-            />
+      </div>
+      <div className="navRight">
+        <div className="searchBar">
+          <Input.Group>
+            <AutoComplete placeholder="Search for" />
             <Select defaultValue="Posts">
               <Option value="Posts">Posts</Option>
               <Option value="Users">Users</Option>
@@ -56,8 +55,8 @@ const UseNav = () => {
           </div>
         </div>
       </div>
-      <Divider style={{ color: "#466680", width: 500 }} />
-    </header>
+      <Divider />
+    </nav>
   );
 };
 

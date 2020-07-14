@@ -8,8 +8,8 @@ const SignIn = () => {
 
   return (
     <div className="signIn">
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={14} flex={3} offset={1}>
+      <Row>
+        <Col>
           <Card title="Commit to Connections" className="loginInfoCard">
             <p>
               BootSpace is built on your work from GitHub. We use the GitHub API
@@ -23,12 +23,8 @@ const SignIn = () => {
             </p>
           </Card>
         </Col>
-        <Col className="gutter-row" span={6} flex={2}>
-          <Card
-            title="Please Sign In or Sign Up"
-            className="loginCard"
-            style={{ textAlign: "center", margin: "0 0 1em 0" }}
-          >
+        <Col>
+          <Card title="Please Sign In or Sign Up" className="loginCard">
             {error !== null && <div className="error">{error}</div>}
 
             <Button
@@ -36,11 +32,10 @@ const SignIn = () => {
                 try {
                   signInWithGithub();
                 } catch (error) {
-                  console.error("Error signing in with Google", error);
+                  console.error("Error signing in with Github", error);
                 }
               }}
               className="githubLogin"
-              style={{ margin: "1em auto" }}
             >
               Sign In with GitHub
             </Button>
@@ -51,11 +46,10 @@ const SignIn = () => {
                 try {
                   signInWithGithub();
                 } catch (error) {
-                  console.error("Error signing in with Google", error);
+                  console.error("Error signing in with Github", error);
                 }
               }}
               className="githubLogin"
-              style={{ margin: "1em" }}
             >
               <Tooltip title="You'll still need to sign in after you create your account. If you are having trouble after you press create, check your email for confirmation">
                 Create an account with GitHub
@@ -70,9 +64,7 @@ const SignIn = () => {
             </Tooltip>
             <br />
             <Tooltip title="Whats GitHub?">
-              <a href="https://github.com/join" style={{ margin: "0 8px" }}>
-                Don't have a GitHub account?
-              </a>
+              <a href="https://github.com/join">Don't have a GitHub account?</a>
             </Tooltip>
           </Card>
         </Col>

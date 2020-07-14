@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, Row, Col, Statistic } from "antd";
-import { UserContext } from "../providers/UserProvider";
-import PostFeed from "../components/user/dashboard/feed";
-import DashInfo from "../components/user/dashboard/dashInfo";
-const UseHome = () => {
+import { UserContext } from "../../providers/UserProvider";
+import PostFeed from "../../components/user/dashboard/feed";
+import DashInfo from "../../components/user/dashboard/dashInfo";
+const UserHome = () => {
   const user = useContext(UserContext);
   const { displayName, userData } = user;
   const [error, setError] = useState(null);
@@ -54,4 +54,4 @@ const UseHome = () => {
   }
 };
 
-export default UseHome;
+export default UserHome;

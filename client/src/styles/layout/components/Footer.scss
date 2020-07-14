@@ -8,3 +8,15 @@
     height: auto;
   }
 }
+@media (max-width: 500px) {
+  .footer {
+    text-align: center;
+    background-color: #40a9ff;
+    color: #e6f7ff;
+    margin-top: 25em;
+    img {
+      width: 75%;
+      height: auto;
+    }
+  }
+}

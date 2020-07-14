@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Card, Row, Col, Divider, Space } from "antd";
 import { Link } from "@reach/router";
-import { UserContext } from "../providers/UserProvider";
+import { UserContext } from "../../providers/UserProvider";
 
 const Profile = () => {
   const user = useContext(UserContext);
@@ -11,8 +11,8 @@ const Profile = () => {
   return (
     <div className="main">
       <div className="profilePage">
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-          <Col className="gutter-row" span={6} offset={1} flex={2}>
+        <Row>
+          <Col className="profileLeft">
             <Card title={displayName} className="profileCard">
               <img src={photoURL} alt="Profile" />
             </Card>
@@ -38,7 +38,7 @@ const Profile = () => {
               </div>
             </Card>{" "}
           </Col>
-          <Col className="gutter-row" span={15} flex={3}>
+          <Col className="profileRight">
             <Card title="About Me" className="infoCard">
               <p>
                 Website: {userData.blog}
@@ -58,13 +58,13 @@ const Profile = () => {
                 </h4>
               </div>
             </Card>{" "}
-            <Card style={{ margin: "1em 0" }}>
+            <Card>
               <Divider orientation="center" plain>
                 {displayName}'s followers
               </Divider>
               <div className="friendList">
                 {friendData.map((item) => (
-                  <Space direction="vertical" align="center" key={item.login}>
+                  <Space direction="vertical" key={item.login}>
                     <Card title={item.login} className="friendCard">
                       <img src={item.avatar_url} alt="Profile" />
                     </Card>

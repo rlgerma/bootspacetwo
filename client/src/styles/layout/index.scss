@@ -1,11 +1,13 @@
 // import components
 @import "./components/Navbar.scss";
 @import "./components/Footer.scss";
-@import "./components/Profile.scss";
 
 // import pages
-@import "./pages/HomePage.scss";
+@import "./pages/User/Profile.scss";
+@import "./pages/User/UserHome.scss";
 @import "./pages/Blog.scss";
+@import "./pages/Home.scss";
+@import "./pages/Login.scss";
 
 // Main Style Imports
 html {

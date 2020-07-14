@@ -1,0 +1,140 @@
+.profileLeft {
+  width: 25%;
+  float: left;
+  text-align: center;
+  margin: 0 2% 0 3%;
+  .profileCard {
+    img {
+      margin: 0 auto;
+      width: 90%;
+      border: 2px outset #000000;
+    }
+
+    .ant-card-head {
+      background-color: #40a9ff;
+
+      .ant-card-head-title {
+        font-family: lato, sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 2em;
+        color: #000;
+      }
+    }
+
+    .ant-card-body {
+    }
+  }
+}
+.profileRight {
+  width: 65%;
+  float: right;
+  margin: 0 3% 0 2%;
+  .infoCard {
+    .ant-card-head {
+      background-color: #40a9ff;
+
+      .ant-card-head-title {
+        font-family: lato, sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 2em;
+        color: #000;
+      }
+    }
+
+    .ant-card-body {
+    }
+  }
+
+  .underCard {
+    .ant-card-head {
+      background-color: rgb(242, 242, 242);
+
+      .ant-card-head-title {
+        font-family: lato, sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 1em;
+        color: #000;
+        text-align: center;
+      }
+    }
+
+    .ant-card-body {
+      background-color: #fff;
+      text-align: center;
+
+      .underCardLinks {
+        line-height: 2em;
+      }
+    }
+  }
+  .friendList {
+    text-align: center;
+    .friendCard {
+      width: 10em;
+      margin: 1em;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+
+      .ant-card-head {
+        background-color: rgb(242, 242, 242);
+
+        .ant-card-head-title {
+          font-family: lato, sans-serif;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 14px;
+          color: #000;
+          text-align: center;
+          padding: 1px;
+        }
+      }
+
+      .ant-card-body {
+        background-color: #fff;
+        text-align: center;
+      }
+      img {
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      @keyframes bounce {
+        0% {
+          -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+        }
+        50% {
+          -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+        }
+        100% {
+          -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+        }
+      }
+
+      @keyframes bounceFloat {
+        100% {
+          -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+        }
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        animation-name: bounceFloat, bounce;
+        animation-duration: 0.3s, 1.5s;
+        animation-delay: 0s, 0.3s;
+        animation-timing-function: ease-out, ease-in-out;
+        animation-iteration-count: 1, infinite;
+        animation-fill-mode: forwards;
+        animation-direction: normal, alternate;
+      }
+    }
+  }
+}

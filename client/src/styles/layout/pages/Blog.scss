@@ -1,11 +1,30 @@
-.blogCard {
-  margin: 1em auto;
-  width: 50%;
-  .ant-card-head-title {
-    text-align: center;
-    font-size: 1.5em;
+.blogRow {
+  margin: auto;
+  .blogCard {
+    margin: 1em auto;
+    width: 50%;
+    .ant-card-head-title {
+      text-align: center;
+      font-size: 1.5em;
+    }
+    .ant-card-body {
+      padding: 2em;
+    }
   }
-  .ant-card-body {
-    padding: 2em;
+}
+@media (max-width: 500px) {
+  .blogRow {
+    margin: 15em auto -15em;
+    .blogCard {
+      margin: 1em auto;
+      width: 100%;
+      .ant-card-head-title {
+        text-align: center;
+        font-size: 1.5em;
+      }
+      .ant-card-body {
+        padding: 2em;
+      }
+    }
   }
 }
