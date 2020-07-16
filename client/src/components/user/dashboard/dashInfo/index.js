@@ -24,8 +24,7 @@ const DashInfo = () => {
         (result) => {
           setIsLoaded(true);
           setItems(result.items);
-          localStorage.setItem("events", JSON.stringify(result));
-          console.log(result);
+          sessionStorage.setItem("events", JSON.stringify(result));
         },
 
         (error) => {
@@ -39,7 +38,7 @@ const DashInfo = () => {
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    const dashData = JSON.parse(localStorage.getItem("events"));
+    const dashData = JSON.parse(sessionStorage.getItem("events"));
     console.log(dashData);
 
     const like = () => {
@@ -72,31 +71,23 @@ const DashInfo = () => {
       <span key="comment-basic-reply-to">Reply to</span>,
     ];
     return (
-      <>
-        {!!dashData.length &&
-          dashData.map((item) => (
-            <Row gutter={16} key={item.id}>
-              <Comment
-                actions={actions}
-                author={item.id}
-                // avatar={<Avatar src={item} alt="Han Solo" />}
-                content={
-                  <p>
-                    We supply a series of design principles, practical patterns
-                    and high quality design resources (Sketch and Axure), to
-                    help people create their product prototypes beautifully and
-                    efficiently.
-                  </p>
-                }
-                datetime={
-                  <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-                    <span>{item.created_at}</span>
-                  </Tooltip>
-                }
-              />
-            </Row>
-          ))}
-      </>
+      <ul>
+        {dashData.map((item) => (
+          <Row gutter={16} key={item.id}>
+            <Comment
+              actions={actions}
+              author={item.id}
+              // avatar={<Avatar src={item} alt="Han Solo" />}
+              content={<p>Still in Development</p>}
+              datetime={
+                <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
+                  <span>{item.created_at}</span>
+                </Tooltip>
+              }
+            />
+          </Row>
+        ))}
+      </ul>
     );
   }
 };

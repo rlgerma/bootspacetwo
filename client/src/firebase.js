@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { navigate } from "@reach/router";
 import "firebase/auth";
 import "firebase/firestore";
-
+import "firebase/performance";
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -18,6 +18,7 @@ export const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({ experimentalForceLongPolling: true });
+export const perf = firebase.performance();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
