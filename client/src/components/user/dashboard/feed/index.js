@@ -1,11 +1,11 @@
 import React from "react";
 import { Divider, Comment, Avatar, Form, Button, List, Input } from "antd";
 import moment from "moment";
-
+import { firestore } from "../../../../firebase";
 const { TextArea } = Input;
 const _userData = JSON.parse(localStorage.getItem("bootSpaceUser"));
 
-const CommentList = ({ comments }) => (
+const CommentList = ({ comments, feedData }) => (
   <List
     dataSource={comments}
     header={<Divider orientation="left">Your Feed</Divider>}
@@ -54,6 +54,24 @@ class PostFeed extends React.Component {
     });
 
     setTimeout(() => {
+      firestore
+        .collection("feed")
+        .add({
+          comments: [
+            {
+              author: `${_userData.name}`,
+              avatar: `${_userData.avatar_url}`,
+              content: `${this.state.value}`,
+              datetime: moment().format("YYYY-MM-DD HH:mm"),
+            },
+          ],
+        })
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
       this.setState({
         submitting: false,
         value: "",
