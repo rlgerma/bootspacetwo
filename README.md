@@ -6,7 +6,7 @@ This is a new version of an old project I started with [Carina Ullman](https://g
 ## Changes from old version
 
 * Migrated from Heroku to Firebase.
-* Updated & minimized dependencies.
+* Reduced dependencies.
 * Integration of cloud functions.
 * headless wordpress CMS for admin blog page
 
