@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Row, Col, Statistic } from "antd";
+import { Card, Row, Col } from "antd";
 import { UserContext } from "../../providers/UserProvider";
 import PostFeed from "../../components/user/dashboard/feed";
 import DashInfo from "../../components/user/dashboard/dashInfo";
@@ -26,7 +26,6 @@ const UserHome = () => {
       );
   });
   if (error) {
-    console.log(items);
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading...</div>;

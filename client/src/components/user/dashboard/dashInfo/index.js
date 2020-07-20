@@ -11,12 +11,15 @@ import {
 const DashInfo = () => {
   const user = useContext(UserContext);
   const { userData } = user;
-  const [error, setError, action, setAction] = useState(null);
+  const [error, setError] = useState(null);
+  const [action, setAction] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const events = `https://api.github.com/users/${userData.login}/received_events`;
+  const dashData = JSON.parse(sessionStorage.getItem("events"));
+
   useEffect(() => {
     fetch(events)
       .then((res) => res.json())
@@ -33,14 +36,14 @@ const DashInfo = () => {
         }
       );
   });
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading...</div>;
+  } else if (dashData === null) {
+    return <p>loading posts..{setTimeout(window.location.reload(), 2000)}</p>;
   } else {
-    const dashData = JSON.parse(sessionStorage.getItem("events"));
-    console.log(dashData);
-
     const like = () => {
       setLikes(1);
       setDislikes(0);
@@ -68,7 +71,7 @@ const DashInfo = () => {
           <span className="comment-action">{dislikes}</span>
         </span>
       </Tooltip>,
-      <span key="comment-basic-reply-to">Reply to</span>,
+      <span key="comment-basic-reply-to">Comment</span>,
     ];
     return (
       <ul>
@@ -76,12 +79,19 @@ const DashInfo = () => {
           <Row gutter={16} key={item.id}>
             <Comment
               actions={actions}
-              author={item.id}
-              // avatar={<Avatar src={item} alt="Han Solo" />}
-              content={<p>Still in Development</p>}
+              author={item.actor.login}
+              avatar={
+                <Avatar src={item.actor.avatar_url} alt={item.actor.login} />
+              }
+              content={
+                <p>
+                  {item.type} {item.payload.action} on{" "}
+                  <a href={item.repo.url}>{item.repo.name}</a>
+                </p>
+              }
               datetime={
                 <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
-                  <span>{item.created_at}</span>
+                  <span>{moment(item.created_at).fromNow()}</span>
                 </Tooltip>
               }
             />
