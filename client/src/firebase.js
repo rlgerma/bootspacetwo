@@ -1,10 +1,11 @@
 import firebase from "firebase/app";
 // eslint-disable-next-line
 import dotenv from "dotenv";
-import { navigate } from "@reach/router";
+// import { navigate } from "@reach/router";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/performance";
+import "firebase/database";
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -21,7 +22,7 @@ firebase.firestore().settings({ experimentalForceLongPolling: true });
 export const perf = firebase.performance();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-
+export const database = firebase.database();
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
   auth.signInWithPopup(provider).then(function(result) {
@@ -45,7 +46,6 @@ export const signInWithGithub = () => {
       lastUpdate: result.additionalUserInfo.profile.updated_at,
     };
     localStorage.setItem("bootSpaceUser", JSON.stringify(userData));
-    navigate("/home");
   });
 };
 

@@ -3,12 +3,15 @@ import { Card, Row, Col } from "antd";
 import { UserContext } from "../../providers/UserProvider";
 import PostFeed from "../../components/user/dashboard/feed";
 import DashInfo from "../../components/user/dashboard/dashInfo";
+import FeedList from "../../components/user/dashboard/feed/FeedList";
+
 const UserHome = () => {
   const user = useContext(UserContext);
   const { displayName, userData } = user;
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     fetch(userData.followersUrl)
       .then((res) => res.json())
@@ -35,6 +38,7 @@ const UserHome = () => {
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col className="gutter-row" span={6} offset={1} flex={2}>
             <PostFeed />
+            <FeedList />
           </Col>
           <Col className="gutter-row" span={16} flex={3}>
             <Card

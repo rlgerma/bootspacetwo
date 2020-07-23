@@ -31,7 +31,7 @@ const UseNav = () => {
             </Select>
           </Input.Group>
           <div className="navLinks">
-            <Link to="/home">
+            <Link to="/">
               <HomeOutlined />
               home
             </Link>

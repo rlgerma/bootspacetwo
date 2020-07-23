@@ -15,7 +15,7 @@ function Application() {
     <>
       <UseNav />
       <Router>
-        <UserHome path="/home" />
+        <UserHome path="/" />
         <Profile path="/profile" />
         <Blog path="/blog" />
       </Router>
