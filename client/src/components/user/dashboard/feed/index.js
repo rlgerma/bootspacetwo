@@ -4,16 +4,21 @@ import moment from "moment";
 import firebase from "firebase";
 const { TextArea } = Input;
 const _userData = JSON.parse(localStorage.getItem("bootSpaceUser"));
-
+const newPostKey = firebase
+  .database()
+  .ref()
+  .child("posts")
+  .push().key;
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
-    header={<Divider orientation="left">Your Feed</Divider>}
+    header={
+      <Divider orientation="left">Sending post to BootSpace feed...</Divider>
+    }
     itemLayout="horizontal"
     renderItem={(props) => <Comment {...props} />}
   />
 );
-
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
@@ -56,16 +61,12 @@ class PostFeed extends React.Component {
     setTimeout(() => {
       firebase
         .database()
-        .ref("feed/")
-        .push({
-          post: [
-            {
-              author: `${_userData.name}`,
-              avatar: `${_userData.avatar_url}`,
-              content: `${this.state.value}`,
-              datetime: moment().format("LLL"),
-            },
-          ],
+        .ref("feed/posts/" + newPostKey)
+        .update({
+          author: `${_userData.name}`,
+          avatar: `${_userData.avatar_url}`,
+          content: `${this.state.value}`,
+          datetime: moment().format("LLL"),
         });
       this.setState({
         submitting: false,

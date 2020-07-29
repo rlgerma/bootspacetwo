@@ -23,6 +23,7 @@ export const perf = firebase.performance();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const database = firebase.database();
+
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
   auth.signInWithPopup(provider).then(function(result) {
@@ -48,7 +49,17 @@ export const signInWithGithub = () => {
     localStorage.setItem("bootSpaceUser", JSON.stringify(userData));
   });
 };
-
+export const getNewsFeed = () => {
+  const postsRef = database.ref("feed/posts");
+  postsRef.once("value").then(function(snapshot) {
+    let arr = [];
+    snapshot.forEach(function(childSnapshot) {
+      let post = childSnapshot.toJSON();
+      arr.push(post);
+    });
+    sessionStorage.setItem("feed", JSON.stringify(arr));
+  });
+};
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
 

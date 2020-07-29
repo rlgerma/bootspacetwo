@@ -1,55 +1,70 @@
-import React, { useEffect, useState } from "react";
-import firebase from "firebase";
-import { List, Avatar } from "antd";
+import React, { createElement, useState } from "react";
+import { Row, Comment, Tooltip, Avatar } from "antd";
+import moment from "moment";
+import {
+  DislikeOutlined,
+  LikeOutlined,
+  DislikeFilled,
+  LikeFilled,
+} from "@ant-design/icons";
 
+const feedData = JSON.parse(sessionStorage.getItem("feed"));
 const FeedList = () => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-  const postsRef = firebase.database().ref("feed/");
-  useEffect(() => {
-    fetch(postsRef)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.items);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, []);
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-      <>
-        {items.map((item) => (
-          <List
-            itemLayout="horizontal"
-            dataSource={item}
-            renderItem={(item) => (
-              <List.Item key={item.id}>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                  }
-                  title={<a href="https://ant.design"></a>}
-                  description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                />
-              </List.Item>
-            )}
-          />
-        ))}
-      </>
-    );
-  }
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [action, setAction] = useState(null);
+  const like = () => {
+    setLikes(1);
+    setDislikes(0);
+    setAction("liked");
+  };
+
+  const dislike = () => {
+    setLikes(0);
+    setDislikes(1);
+    setAction("disliked");
+  };
+
+  const actions = [
+    <Tooltip key="comment-basic-like" title="Like">
+      <span onClick={like}>
+        {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
+        <span className="comment-action">{likes}</span>
+      </span>
+    </Tooltip>,
+    <Tooltip key="comment-basic-dislike" title="Dislike">
+      <span onClick={dislike}>
+        {React.createElement(
+          action === "disliked" ? DislikeFilled : DislikeOutlined
+        )}
+        <span className="comment-action">{dislikes}</span>
+      </span>
+    </Tooltip>,
+    <span key="comment-basic-reply-to">Comment</span>,
+  ];
+  return (
+    <>
+      {feedData
+        .slice(0)
+        .reverse()
+        .map((item) => (
+          <Row gutter={16} key={item.id}>
+            <Comment
+              style={{ marginLeft: "3%" }}
+              actions={actions}
+              author={item.author}
+              avatar={<Avatar src={item.avatar} alt={item.author} />}
+              content={<p>{item.content}</p>}
+              datetime={
+                <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
+                  <span>{item.datetime}</span>
+                </Tooltip>
+              }
+            />
+          </Row>
+        ))}{" "}
+    </>
+  );
 };
+
 export default FeedList;

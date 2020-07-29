@@ -76,7 +76,7 @@ const DashInfo = () => {
     return (
       <ul>
         {dashData.map((item) => (
-          <Row gutter={16} key={item.id}>
+          <Row key={item.id}>
             <Comment
               actions={actions}
               author={item.actor.login}
