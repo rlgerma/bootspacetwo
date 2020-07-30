@@ -8,7 +8,7 @@ import UseNav from "../components/user/layout/UseNav";
 import NavBar from "../components/layout/NavBar";
 import Profile from "./User/Profile";
 import SignIn from "../components/user/auth/SignIn";
-
+import SideNav from "../components/layout/SideNav";
 function Application() {
   const user = useContext(UserContext);
   return user ? (

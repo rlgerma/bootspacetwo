@@ -5,6 +5,8 @@ import { getNewsFeed } from "../../firebase";
 import PostFeed from "../../components/user/dashboard/feed";
 import DashInfo from "../../components/user/dashboard/dashInfo";
 import FeedList from "../../components/user/dashboard/feed/FeedList";
+import SideNav from "../../components/layout/SideNav";
+
 const UserHome = () => {
   const { TabPane } = Tabs;
   const user = useContext(UserContext);
@@ -40,7 +42,7 @@ const UserHome = () => {
           <Col className="gutter-row" span={6} offset={1} flex={2}>
             <PostFeed />
           </Col>
-          <Col className="gutter-row" span={16} flex={3}>
+          <Col className="gutter-row" span={14} flex={2}>
             <Card
               title={`Welcome back, ${displayName
                 .split(" ")
@@ -57,6 +59,9 @@ const UserHome = () => {
                 </TabPane>
               </Tabs>
             </Card>{" "}
+          </Col>
+          <Col className="gutter-row" span={2} flex={1}>
+            <SideNav />
           </Col>
         </Row>
       </div>
