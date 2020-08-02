@@ -1,4 +1,6 @@
-.sideNav {
-  float: left;
+#sideNav {
   position: fixed;
+  top: 200;
+  height: 3rem;
+  z-index: 1000;
 }

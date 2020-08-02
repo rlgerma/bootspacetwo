@@ -8,26 +8,33 @@ import {
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
+
+const token = JSON.parse(sessionStorage.getItem("githubToken"));
+
 const DashInfo = () => {
   const user = useContext(UserContext);
   const { userData } = user;
   const [error, setError] = useState(null);
   const [action, setAction] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const [data, setData] = useState([]);
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const events = `https://api.github.com/users/${userData.login}/received_events`;
-  const dashData = JSON.parse(sessionStorage.getItem("events"));
 
   useEffect(() => {
-    fetch(events)
+    fetch(events, {
+      headers: {
+        Authorization: `token ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then(
         (result) => {
+          let data = [];
+          data.push(result);
           setIsLoaded(true);
-          setItems(result.items);
-          sessionStorage.setItem("events", JSON.stringify(result));
+          setData(data[0]);
         },
 
         (error) => {
@@ -41,7 +48,7 @@ const DashInfo = () => {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading...</div>;
-  } else if (dashData === null) {
+  } else if (data === null) {
     return <p>loading posts..{setTimeout(window.location.reload(), 2000)}</p>;
   } else {
     const like = () => {
@@ -75,23 +82,23 @@ const DashInfo = () => {
     ];
     return (
       <ul>
-        {dashData.map((item) => (
-          <Row key={item.id}>
+        {data.map((user) => (
+          <Row key={user.id}>
             <Comment
               actions={actions}
-              author={item.actor.login}
+              author={user.actor.login}
               avatar={
-                <Avatar src={item.actor.avatar_url} alt={item.actor.login} />
+                <Avatar src={user.actor.avatar_url} alt={user.actor.login} />
               }
               content={
                 <p>
-                  {item.type} {item.payload.action} on{" "}
-                  <a href={item.repo.url}>{item.repo.name}</a>
+                  {user.type} {user.payload.action} on{" "}
+                  <a href={user.repo.url}>{user.repo.name}</a>
                 </p>
               }
               datetime={
                 <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
-                  <span>{moment(item.created_at).fromNow()}</span>
+                  <span>{moment(user.created_at).fromNow()}</span>
                 </Tooltip>
               }
             />

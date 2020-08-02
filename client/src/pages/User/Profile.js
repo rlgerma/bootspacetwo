@@ -6,7 +6,7 @@ import { UserContext } from "../../providers/UserProvider";
 const Profile = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email, userData } = user;
-  const friendData = JSON.parse(localStorage.getItem("friends"));
+  const friendData = JSON.parse(sessionStorage.getItem("friends"));
 
   return (
     <div className="main">

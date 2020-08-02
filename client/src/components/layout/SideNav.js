@@ -1,10 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { Menu, Button } from "antd";
-import { OverPack } from "rc-scroll-anim";
-import TweenOne from "rc-tween-one";
-import QueueAnim from "rc-queue-anim";
-import { ScrollAnimation } from "react-animate-on-scroll";
+import { Menu, Button, Affix } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -16,7 +12,7 @@ import {
 
 class SideNav extends React.Component {
   state = {
-    collapsed: false,
+    collapsed: true,
   };
 
   toggleCollapsed = () => {
@@ -27,7 +23,7 @@ class SideNav extends React.Component {
 
   render() {
     return (
-      <div className="sideNav">
+      <div className={this.state.show ? "active" : "hidden"} id="sideNav">
         <Button
           type="primary"
           onClick={this.toggleCollapsed}

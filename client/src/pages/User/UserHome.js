@@ -7,6 +7,8 @@ import DashInfo from "../../components/user/dashboard/dashInfo";
 import FeedList from "../../components/user/dashboard/feed/FeedList";
 import SideNav from "../../components/layout/SideNav";
 
+const token = JSON.parse(sessionStorage.getItem("githubToken"));
+
 const UserHome = () => {
   const { TabPane } = Tabs;
   const user = useContext(UserContext);
@@ -16,13 +18,17 @@ const UserHome = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(userData.followersUrl)
+    fetch("https://api.github.com/user/followers", {
+      headers: {
+        Authorization: `token ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
           setItems(result.items);
-          localStorage.setItem("friends", JSON.stringify(result));
+          sessionStorage.setItem("friends", JSON.stringify(result));
         },
 
         (error) => {

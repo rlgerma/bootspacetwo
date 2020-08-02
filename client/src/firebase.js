@@ -27,7 +27,8 @@ export const database = firebase.database();
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
   auth.signInWithPopup(provider).then(function(result) {
-    var userData = {
+    let token = result.credential.accessToken;
+    let userData = {
       avatar_url: result.additionalUserInfo.profile.avatar_url,
       login: result.additionalUserInfo.profile.login,
       bio: result.additionalUserInfo.profile.bio,
@@ -46,7 +47,9 @@ export const signInWithGithub = () => {
       hireable: result.additionalUserInfo.profile.hireable,
       lastUpdate: result.additionalUserInfo.profile.updated_at,
     };
-    localStorage.setItem("bootSpaceUser", JSON.stringify(userData));
+    console.log(token);
+    sessionStorage.setItem("githubToken", JSON.stringify(token));
+    sessionStorage.setItem("bootSpaceUser", JSON.stringify(userData));
   });
 };
 export const getNewsFeed = () => {
