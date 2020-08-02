@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 // eslint-disable-next-line
 import dotenv from "dotenv";
-// import { navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/performance";
@@ -28,26 +28,27 @@ const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
   auth.signInWithPopup(provider).then(function(result) {
     let token = result.credential.accessToken;
+    let user = result.additionalUserInfo.profile;
     let userData = {
-      avatar_url: result.additionalUserInfo.profile.avatar_url,
-      login: result.additionalUserInfo.profile.login,
-      bio: result.additionalUserInfo.profile.bio,
-      repos: result.additionalUserInfo.profile.public_repos,
-      reposUrl: result.additionalUserInfo.profile.repos_url,
-      followers: result.additionalUserInfo.profile.followers,
-      followersUrl: result.additionalUserInfo.profile.followers_url,
-      following: result.additionalUserInfo.profile.following,
-      location: result.additionalUserInfo.profile.location,
-      profileUrl: result.additionalUserInfo.profile.html_url,
-      blog: result.additionalUserInfo.profile.blog,
-      name: result.additionalUserInfo.profile.name,
-      gists: result.additionalUserInfo.profile.gists_url,
-      createdAt: result.additionalUserInfo.profile.created_at,
-      company: result.additionalUserInfo.profile.company,
-      hireable: result.additionalUserInfo.profile.hireable,
-      lastUpdate: result.additionalUserInfo.profile.updated_at,
+      avatar_url: user.avatar_url,
+      login: user.login,
+      bio: user.bio,
+      repos: user.public_repos,
+      reposUrl: user.repos_url,
+      followers: user.followers,
+      followersUrl: user.followers_url,
+      following: user.following,
+      location: user.location,
+      profileUrl: user.html_url,
+      blog: user.blog,
+      name: user.name,
+      gists: user.gists_url,
+      createdAt: user.created_at,
+      company: user.company,
+      hireable: user.hireable,
+      lastUpdate: user.updated_at,
+      storage: user.disk_usage,
     };
-    console.log(token);
     sessionStorage.setItem("githubToken", JSON.stringify(token));
     sessionStorage.setItem("bootSpaceUser", JSON.stringify(userData));
   });
@@ -97,6 +98,7 @@ const getUserDocument = async (uid) => {
     return {
       uid,
       ...userDocument.data(),
+      ...navigate("/"),
     };
   } catch (error) {
     console.error("Error fetching user", error);

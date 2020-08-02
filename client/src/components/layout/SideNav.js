@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { Menu, Button, Affix } from "antd";
+import { Menu, Button } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,

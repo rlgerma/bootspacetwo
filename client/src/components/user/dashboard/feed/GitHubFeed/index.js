@@ -1,6 +1,6 @@
 import React, { createElement, useEffect, useContext, useState } from "react";
-import { Row, Comment, Tooltip, Avatar } from "antd";
-import { UserContext } from "../../../../providers/UserProvider";
+import { Row, Comment, Tooltip, Avatar, Spin } from "antd";
+import { UserContext } from "../../../../../providers/UserProvider";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -47,9 +47,18 @@ const DashInfo = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Spin />
+      </div>
+    );
   } else if (data === null) {
-    return <p>loading posts..{setTimeout(window.location.reload(), 2000)}</p>;
+    return (
+      <p>
+        <Spin />
+        {setTimeout(window.location.reload(), 2000)}
+      </p>
+    );
   } else {
     const like = () => {
       setLikes(1);

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Card, Row, Col, Divider, Space } from "antd";
 import { Link } from "@reach/router";
 import { UserContext } from "../../providers/UserProvider";
-
+import moment from "moment";
 const Profile = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email, userData } = user;
@@ -20,21 +20,27 @@ const Profile = () => {
               <p>{userData.location}</p>
               <p>
                 Last Login:{" "}
-                <span className="lastLog">{userData.lastUpdate}</span>
+                <span className="lastLog">{moment().format("LLL")}</span>
               </p>
 
               <div className="underCardLinks">
                 <Divider plain>Contact {displayName}</Divider>
-
-                <a href={`mailTo:${email}`}>Send email</a>
-
-                <a href="/#">Add to Friends</a>
-
-                <a href="/#">Instant Message</a>
-
-                <a href="/#">Add to Group</a>
-
-                <a href="/#">Block User</a>
+                <Row>
+                  <Col className="gutter-row" span={12} offset={1} flex={2}>
+                    <a href={`mailTo:${email}`}>Send message</a>
+                  </Col>
+                  <Col className="gutter-row" span={12} offset={1} flex={3}>
+                    <a href="/#">Add to Friends</a>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="gutter-row" span={12} offset={1} flex={2}>
+                    <a href="/#">Add to Group</a>
+                  </Col>
+                  <Col className="gutter-row" span={12} offset={1} flex={3}>
+                    <a href="/#">Block User</a>
+                  </Col>
+                </Row>
               </div>
             </Card>{" "}
           </Col>

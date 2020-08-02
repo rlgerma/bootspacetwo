@@ -48,7 +48,7 @@ const FeedList = () => {
         .slice(0)
         .reverse()
         .map((item) => (
-          <Row gutter={16} key={item.id}>
+          <Row gutter={16} key={item.content}>
             <Comment
               style={{ marginLeft: "3%" }}
               actions={actions}

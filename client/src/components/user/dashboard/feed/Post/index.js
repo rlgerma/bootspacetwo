@@ -1,9 +1,18 @@
 import React from "react";
-import { Divider, Comment, Avatar, Form, Button, List, Input } from "antd";
+import {
+  Divider,
+  Comment,
+  Avatar,
+  Form,
+  Button,
+  List,
+  Input,
+  Spin,
+} from "antd";
 import moment from "moment";
 import firebase from "firebase";
 const { TextArea } = Input;
-const _userData = JSON.parse(localStorage.getItem("bootSpaceUser"));
+const _userData = JSON.parse(sessionStorage.getItem("bootSpaceUser"));
 const newPostKey = firebase
   .database()
   .ref()
@@ -13,7 +22,9 @@ const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
     header={
-      <Divider orientation="left">Sending post to BootSpace feed...</Divider>
+      <Divider orientation="left">
+        <Spin />
+      </Divider>
     }
     itemLayout="horizontal"
     renderItem={(props) => <Comment {...props} />}
