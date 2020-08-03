@@ -11,8 +11,8 @@ import {
 } from "antd";
 import moment from "moment";
 import firebase from "firebase";
+import { userData } from "../../../../../firebase";
 const { TextArea } = Input;
-const _userData = JSON.parse(sessionStorage.getItem("bootSpaceUser"));
 const newPostKey = firebase
   .database()
   .ref()
@@ -74,8 +74,8 @@ class PostFeed extends React.Component {
         .database()
         .ref("feed/posts/" + newPostKey)
         .update({
-          author: `${_userData.name}`,
-          avatar: `${_userData.avatar_url}`,
+          author: `${userData.name}`,
+          avatar: `${userData.avatar_url}`,
           content: `${this.state.value}`,
           datetime: moment().format("LLL"),
         });
@@ -84,8 +84,8 @@ class PostFeed extends React.Component {
         value: "",
         comments: [
           {
-            author: `${_userData.name}`,
-            avatar: `${_userData.avatar_url}`,
+            author: `${userData.name}`,
+            avatar: `${userData.avatar_url}`,
             content: <p>{this.state.value}</p>,
             datetime: moment().fromNow(),
           },
@@ -103,12 +103,11 @@ class PostFeed extends React.Component {
 
   render() {
     const { comments, submitting, value } = this.state;
-
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
-          avatar={<Avatar src={_userData.avatar_url} alt={_userData.name} />}
+          avatar={<Avatar src={userData.avatar_url} alt={userData.name} />}
           content={
             <Editor
               onChange={this.handleChange}

@@ -1,14 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { Card, Row, Col, Tabs } from "antd";
 import { UserContext } from "../../providers/UserProvider";
-import { getNewsFeed } from "../../firebase";
-import PostFeed from "../../components/user/dashboard/feed/Post";
-import DashInfo from "../../components/user/dashboard/feed/GitHubFeed";
-import FeedList from "../../components/user/dashboard/feed/BootSpaceFeed";
+import { token } from "../../firebase";
 import SideNav from "../../components/layout/SideNav";
 import Metrics from "../../components/user/dashboard/metrics";
-
-const token = JSON.parse(sessionStorage.getItem("githubToken"));
+import PostFeed from "../../components/user/dashboard/feeds/Post";
+import GitHubFeed from "../../components/user/dashboard/feeds/GitHubFeed";
+import BootSpaceFeed from "../../components/user/dashboard/feeds/BootSpaceFeed";
+import TwitterFeed from "../../components/user/dashboard/feeds/TwitterFeed";
+import { Card, Row, Col, Tabs } from "antd";
 
 const UserHome = () => {
   const { TabPane } = Tabs;
@@ -46,10 +45,13 @@ const UserHome = () => {
           >
             <Tabs defaultActiveKey="1" centered>
               <TabPane tab="GitHub Feed" key="1">
-                <DashInfo />
+                <GitHubFeed />
               </TabPane>
-              <TabPane tab="BootSpace Feed" key="2" onClick={getNewsFeed()}>
-                <FeedList />
+              <TabPane tab="BootSpace Feed" key="2">
+                <BootSpaceFeed />
+              </TabPane>
+              <TabPane tab="Twitter Feed" key="3">
+                <TwitterFeed />
               </TabPane>
             </Tabs>
           </Card>{" "}

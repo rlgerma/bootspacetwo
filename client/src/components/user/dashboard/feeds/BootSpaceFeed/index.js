@@ -7,9 +7,9 @@ import {
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
+import { feedData } from "../../../../../firebase";
 
-const feedData = JSON.parse(sessionStorage.getItem("feed"));
-const FeedList = () => {
+const BootSpaceFeed = () => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
@@ -67,4 +67,4 @@ const FeedList = () => {
   );
 };
 
-export default FeedList;
+export default BootSpaceFeed;

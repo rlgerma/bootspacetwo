@@ -1,6 +1,5 @@
-import React, { createElement, useEffect, useContext, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import { Row, Comment, Tooltip, Avatar, Spin } from "antd";
-import { UserContext } from "../../../../../providers/UserProvider";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -8,12 +7,9 @@ import {
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
+import { userData, token } from "../../../../../firebase";
 
-const token = JSON.parse(sessionStorage.getItem("githubToken"));
-
-const DashInfo = () => {
-  const user = useContext(UserContext);
-  const { userData } = user;
+const GitHubFeed = () => {
   const [error, setError] = useState(null);
   const [action, setAction] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -118,4 +114,4 @@ const DashInfo = () => {
   }
 };
 
-export default DashInfo;
+export default GitHubFeed;

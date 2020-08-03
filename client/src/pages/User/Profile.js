@@ -1,20 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Card, Row, Col, Divider, Space } from "antd";
 import { Link } from "@reach/router";
-import { UserContext } from "../../providers/UserProvider";
+import { userData, friendData } from "../../firebase";
 import moment from "moment";
 const Profile = () => {
-  const user = useContext(UserContext);
-  const { photoURL, displayName, email, userData } = user;
-  const friendData = JSON.parse(sessionStorage.getItem("friends"));
-
   return (
     <div className="main">
       <div className="profilePage">
         <Row>
           <Col className="profileLeft">
-            <Card title={displayName} className="profileCard">
-              <img src={photoURL} alt="Profile" />
+            <Card title={userData.name} className="profileCard">
+              <img src={userData.avatar_url} alt="Profile" />
             </Card>
             <Card title={userData.company} className="underCard">
               <p>{userData.location}</p>
@@ -24,10 +20,10 @@ const Profile = () => {
               </p>
 
               <div className="underCardLinks">
-                <Divider plain>Contact {displayName}</Divider>
+                <Divider plain>Contact {userData.name}</Divider>
                 <Row>
                   <Col className="gutter-row" span={12} offset={1} flex={2}>
-                    <a href={`mailTo:${email}`}>Send message</a>
+                    <a href={userData.email}>Send message</a>
                   </Col>
                   <Col className="gutter-row" span={12} offset={1} flex={3}>
                     <a href="/#">Add to Friends</a>
@@ -66,7 +62,7 @@ const Profile = () => {
             </Card>{" "}
             <Card>
               <Divider orientation="center" plain>
-                {displayName}'s followers
+                {userData.name}'s followers
               </Divider>
               <div className="friendList">
                 {friendData.map((item) => (

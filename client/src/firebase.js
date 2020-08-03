@@ -19,11 +19,15 @@ export const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({ experimentalForceLongPolling: true });
+
 export const perf = firebase.performance();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const database = firebase.database();
-
+export const userData = JSON.parse(sessionStorage.getItem("bootSpaceUser"));
+export const token = JSON.parse(sessionStorage.getItem("githubToken"));
+export const feedData = JSON.parse(sessionStorage.getItem("feed"));
+export const friendData = JSON.parse(sessionStorage.getItem("friends"));
 const provider = new firebase.auth.GithubAuthProvider();
 export const signInWithGithub = () => {
   auth.signInWithPopup(provider).then(function(result) {
@@ -52,8 +56,9 @@ export const signInWithGithub = () => {
     sessionStorage.setItem("githubToken", JSON.stringify(token));
     sessionStorage.setItem("bootSpaceUser", JSON.stringify(userData));
   });
+  getNewsFeed();
 };
-export const getNewsFeed = () => {
+const getNewsFeed = () => {
   const postsRef = database.ref("feed/posts");
   postsRef.once("value").then(function(snapshot) {
     let arr = [];
