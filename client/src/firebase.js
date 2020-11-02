@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 // eslint-disable-next-line
-import dotenv from "dotenv";
+
 import { navigate } from "@reach/router";
 import "firebase/auth";
 import "firebase/firestore";
@@ -60,9 +60,9 @@ export const signInWithGithub = () => {
 };
 const getNewsFeed = () => {
   const postsRef = database.ref("feed/posts");
-  postsRef.once("value").then(function(snapshot) {
+  postsRef.once("value").then((snapshot) => {
     let arr = [];
-    snapshot.forEach(function(childSnapshot) {
+    snapshot.forEach((childSnapshot) => {
       let post = childSnapshot.toJSON();
       arr.push(post);
     });

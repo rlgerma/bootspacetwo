@@ -1,5 +1,5 @@
 import React, { createElement, useState } from "react";
-import { Row, Comment, Tooltip, Avatar } from "antd";
+import { Row, Comment, Tooltip, Avatar, Skeleton } from "antd";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -26,43 +26,49 @@ const BootSpaceFeed = () => {
   };
 
   const actions = [
-    <Tooltip key="comment-basic-like" title="Like">
+    <Tooltip key='comment-basic-like' title='Like'>
       <span onClick={like}>
         {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
-        <span className="comment-action">{likes}</span>
+        <span className='comment-action'>{likes}</span>
       </span>
     </Tooltip>,
-    <Tooltip key="comment-basic-dislike" title="Dislike">
+    <Tooltip key='comment-basic-dislike' title='Dislike'>
       <span onClick={dislike}>
         {React.createElement(
           action === "disliked" ? DislikeFilled : DislikeOutlined
         )}
-        <span className="comment-action">{dislikes}</span>
+        <span className='comment-action'>{dislikes}</span>
       </span>
     </Tooltip>,
-    <span key="comment-basic-reply-to">Comment</span>,
+    <span key='comment-basic-reply-to'>Comment</span>,
   ];
   return (
     <>
-      {feedData
-        .slice(0)
-        .reverse()
-        .map((item) => (
-          <Row gutter={16} key={item.content}>
-            <Comment
-              style={{ marginLeft: "3%" }}
-              actions={actions}
-              author={item.author}
-              avatar={<Avatar src={item.avatar} alt={item.author} />}
-              content={<p>{item.content}</p>}
-              datetime={
-                <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
-                  <span>{item.datetime}</span>
-                </Tooltip>
-              }
-            />
-          </Row>
-        ))}{" "}
+      {feedData !== null ? (
+        <>
+          {feedData
+            .slice(0)
+            .reverse()
+            .map((item) => (
+              <Row gutter={16} key={item.content}>
+                <Comment
+                  style={{ marginLeft: "3%" }}
+                  actions={actions}
+                  author={item.author}
+                  avatar={<Avatar src={item.avatar} alt={item.author} />}
+                  content={<p>{item.content}</p>}
+                  datetime={
+                    <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
+                      <span>{item.datetime}</span>
+                    </Tooltip>
+                  }
+                />
+              </Row>
+            ))}{" "}
+        </>
+      ) : (
+        <Skeleton active />
+      )}
     </>
   );
 };

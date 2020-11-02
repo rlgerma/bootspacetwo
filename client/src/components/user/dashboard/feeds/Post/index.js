@@ -9,6 +9,7 @@ import {
   Input,
   Spin,
 } from "antd";
+import { Skeleton } from "antd";
 import moment from "moment";
 import firebase from "firebase";
 import { userData } from "../../../../../firebase";
@@ -22,11 +23,11 @@ const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
     header={
-      <Divider orientation="left">
+      <Divider orientation='left'>
         <Spin />
       </Divider>
     }
-    itemLayout="horizontal"
+    itemLayout='horizontal'
     renderItem={(props) => <Comment {...props} />}
   />
 );
@@ -42,10 +43,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </Form.Item>
     <Form.Item>
       <Button
-        htmlType="submit"
+        htmlType='submit'
         loading={submitting}
         onClick={onSubmit}
-        type="primary"
+        type='primary'
       >
         Post!
       </Button>
@@ -105,18 +106,24 @@ class PostFeed extends React.Component {
     const { comments, submitting, value } = this.state;
     return (
       <>
-        {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment
-          avatar={<Avatar src={userData.avatar_url} alt={userData.name} />}
-          content={
-            <Editor
-              onChange={this.handleChange}
-              onSubmit={this.handleSubmit}
-              submitting={submitting}
-              value={value}
+        {userData === null ? (
+          <Skeleton />
+        ) : (
+          <>
+            {comments.length > 0 && <CommentList comments={comments} />}
+            <Comment
+              avatar={<Avatar src={userData.avatar_url} alt={userData.name} />}
+              content={
+                <Editor
+                  onChange={this.handleChange}
+                  onSubmit={this.handleSubmit}
+                  submitting={submitting}
+                  value={value}
+                />
+              }
             />
-          }
-        />
+          </>
+        )}
       </>
     );
   }
