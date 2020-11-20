@@ -4,31 +4,31 @@ import { UserContext } from "../providers/UserProvider";
 import Home from "./Home";
 import Blog from "./Blog";
 import UserHome from "./User/UserHome";
-import UseNav from "../components/user/layout/UseNav";
 import NavBar from "../components/layout/NavBar";
 import Profile from "./User/Profile";
 import SignIn from "../components/user/auth/SignIn";
-function Application() {
+
+const Application = () => {
   const user = useContext(UserContext);
-  return user ? (
+  return (
     <>
-      <UseNav />
+      <NavBar user={user} />
       <Router>
-        <UserHome path="/" />
-        <Profile path="/profile" />
-        <Blog path="/blog" />
-      </Router>
-    </>
-  ) : (
-    <>
-      <NavBar />
-      <Router>
-        <Home path="/" />
-        <SignIn path="/signin" />
-        <Blog path="/blog" />
+        {user ? (
+          <>
+            <UserHome user={user} path='/' />
+            <Profile user={user} path='/profile' />
+          </>
+        ) : (
+          <>
+            <Home path='/' />
+            <SignIn path='/signin' />
+          </>
+        )}
+        <Blog path='/blog' />
       </Router>
     </>
   );
-}
+};
 
 export default Application;

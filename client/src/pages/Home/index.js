@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Card } from "antd";
-import fig from "../images/home-fig.jpeg";
+import fig from "../../images/home-fig.jpeg";
 const Home = () => (
   <div className='home'>
     <Row>

@@ -1,18 +1,28 @@
 import React from "react";
 import { Link } from "@reach/router";
 import logo from "../../images/BootSpaceTrans.png";
-import { HomeOutlined, ReadOutlined, LoginOutlined } from "@ant-design/icons";
+import { auth } from "../../firebase";
+
+import {
+  HomeOutlined,
+  UserOutlined,
+  ReadOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
 
-const NavBar = () => {
+const NavBar = (props) => {
   const { Option } = Select;
-
+  console.log(props.user);
   return (
     <nav>
       <Card>
         <Row>
           <Col md={8} sm={24}>
-            <img src={logo} alt='bootspace' className='logo' />
+            <Link to='/'>
+              <img src={logo} alt='bootspace' className='logo' />
+            </Link>
           </Col>
           <Col md={8} sm={24} />
           <Col md={8} sm={24}>
@@ -33,12 +43,28 @@ const NavBar = () => {
               <Link to='/'>
                 <HomeOutlined /> home
               </Link>
+              {props.user !== undefined ? (
+                <Link to='/profile'>
+                  <UserOutlined /> profile
+                </Link>
+              ) : null}
               <Link to='/blog'>
                 <ReadOutlined /> blog
               </Link>
-              <Link to='/signin'>
-                <LoginOutlined /> login
-              </Link>
+              {props.user !== undefined ? (
+                <Link
+                  to='/'
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  <LogoutOutlined /> log-out
+                </Link>
+              ) : (
+                <Link to='/signin'>
+                  <LoginOutlined /> login
+                </Link>
+              )}
             </div>
           </Col>
         </Row>

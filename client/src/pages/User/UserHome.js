@@ -11,26 +11,25 @@ import TwitterFeed from "../../components/user/dashboard/feeds/TwitterFeed";
 import { Skeleton } from "antd";
 import { Card, Row, Col, Tabs } from "antd";
 
-const UserHome = () => {
-  const user = useContext(UserContext);
+const UserHome = (props) => {
+  const user = props.user;
   const { TabPane } = Tabs;
   const { displayName } = user;
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
-      let url = "https://api.github.com/user/followers";
-      const res = await fetch(url, {
+      const res = await fetch("https://api.github.com/user/followers", {
         headers: {
           Authorization: `token ${token}`,
         },
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          sessionStorage.setItem("friends", JSON.stringify(result));
-          setLoading(false);
-        })
-        .catch((error) => console.error(error));
+      });
+      if (!res.ok) {
+        return;
+      }
+      const friends = await res.json();
+      sessionStorage.setItem("friends", JSON.stringify(friends));
+      setLoading(false);
     };
 
     getData();
@@ -61,7 +60,7 @@ const UserHome = () => {
               >
                 <Tabs defaultActiveKey='1' centered>
                   <TabPane tab='GitHub Feed' key='1'>
-                    <GitHubFeed />
+                    <GitHubFeed user={user} />
                   </TabPane>
                   <TabPane tab='BootSpace Feed' key='2'>
                     <BootSpaceFeed />

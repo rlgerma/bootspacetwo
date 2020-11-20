@@ -29,20 +29,17 @@ const GitHubFeed = () => {
         },
       })
         .then((res) => res.json())
-        .then(
-          (result) => {
-            let data = [];
-            data.push(result);
-            setIsLoaded(true);
-            setData(data[0]);
-            setLoading(false);
-          },
-
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        );
+        .then((result) => {
+          let data = [];
+          data.push(result);
+          setIsLoaded(true);
+          setData(data[0]);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setIsLoaded(true);
+          setError(error);
+        });
     };
     if (userData !== null) {
       getData();
