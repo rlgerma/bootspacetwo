@@ -1,31 +1,68 @@
 import React, { useState } from "react";
 import { signInWithGithub } from "../../../firebase";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { GithubFilled } from "@ant-design/icons";
 import { Card, Row, Col, Divider, Button, Tooltip } from "antd";
-
+import fig from "../../../images/login-fig.jpeg";
+import fig2 from "../../../images/login-fig-two.jpeg";
 const SignIn = () => {
   const [error] = useState(null);
 
   return (
-    <div className="signIn">
+    <div className='signIn'>
       <Row>
-        <Col>
-          <Card title="Commit to Connections" className="loginInfoCard">
-            <p>
-              BootSpace is built on your work from GitHub. We use the GitHub API
-              to help build your profile so you can connect with other BootSpace
-              users.
-            </p>
-            <p>
-              {" "}
-              We only can only access your public information and can not, nor
-              will we create/modify/delete any repositories of yours.
-            </p>
+        <Col md={16} sm={24}>
+          <Card
+            title='Commit to Connections'
+            headStyle={{ textAlign: "center", paddingLeft: "2.5em" }}
+            className='loginInfoCard'
+          >
+            <Row>
+              <Col md={8} />
+              <Col md={16}>
+                <p
+                  style={{
+                    fontSize: "1.2em",
+                    padding: "2em 1em 1em 3.5em",
+                    margin: "1em auto",
+                    lineHeight: "3.5vh",
+                  }}
+                >
+                  BootSpace is built on your work from GitHub. We use the GitHub
+                  API to help build your profile so you can connect with other
+                  BootSpace users.
+                </p>
+                <p
+                  style={{
+                    fontSize: "1.2em",
+                    padding: ".5em 1em 1em 3.5em",
+                    margin: "1em auto",
+                    lineHeight: "3.5vh",
+                  }}
+                >
+                  {" "}
+                  We only can only access your public information and can not,
+                  nor will we create/modify/delete any repositories of yours.
+                </p>
+                <p
+                  style={{
+                    fontSize: "1.2em",
+                    padding: ".5em 1em 1em 3.5em",
+                    margin: "1em auto",
+                    lineHeight: "3.5vh",
+                  }}
+                >
+                  {" "}
+                  BootSpace is not endorsed, sponsored, or approved by GitHub
+                  and is solely a independent application for social networking
+                  purposes
+                </p>
+              </Col>
+            </Row>
           </Card>
         </Col>
-        <Col>
-          <Card title="Please Sign In or Sign Up" className="loginCard">
-            {error !== null && <div className="error">{error}</div>}
+        <Col md={8} sm={24}>
+          <Card title='Sign In' className='loginCard'>
+            {error !== null && <div className='error'>{error}</div>}
 
             <Button
               onClick={() => {
@@ -35,36 +72,15 @@ const SignIn = () => {
                   console.error("Error signing in with Github", error);
                 }
               }}
-              className="githubLogin"
+              className='githubLogin'
             >
-              Sign In with GitHub
+              Sign In with GitHub <GithubFilled />
             </Button>
             <br />
-            <Divider plain>or</Divider>
-            <Button
-              onClick={() => {
-                try {
-                  signInWithGithub();
-                } catch (error) {
-                  console.error("Error signing in with Github", error);
-                }
-              }}
-              className="githubLogin"
-            >
-              <Tooltip title="You'll still need to sign in after you create your account. If you are having trouble after you press create, check your email for confirmation">
-                Create an account with GitHub
-              </Tooltip>
-            </Button>
-            <Tooltip
-              title="You'll still need to sign in after you create your account.
-               If you are having trouble after you press create, check your email for confirmation"
-              trigger="click"
-            >
-              <InfoCircleOutlined />
-            </Tooltip>
+            <img src={fig} alt='figure' style={{ width: "75%" }} />
             <br />
-            <Tooltip title="Whats GitHub?">
-              <a href="https://github.com/join">Don't have a GitHub account?</a>
+            <Tooltip title='Whats GitHub?'>
+              <a href='https://github.com/join'>Don't have a GitHub account?</a>
             </Tooltip>
           </Card>
         </Col>
