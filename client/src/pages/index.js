@@ -14,18 +14,18 @@ const Application = () => {
     <>
       <NavBar user={user} />
       <Router>
-        {user ? (
+        {user !== null && user !== undefined ? (
           <>
-            <UserHome user={user} path='/' />
-            <Profile user={user} path='/profile' />
+            <UserHome user={user} path="/" />
+            <Profile user={user} path="/profile" />
           </>
         ) : (
           <>
-            <Home path='/' />
-            <SignIn path='/signin' />
+            <Home path="/" />
+            <SignIn path="/signin" />
           </>
         )}
-        <Blog path='/blog' />
+        <Blog path="/blog" />
       </Router>
     </>
   );

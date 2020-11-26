@@ -61,21 +61,21 @@ const GitHubFeed = () => {
   };
 
   const actions = [
-    <Tooltip key='comment-basic-like' title='Like'>
+    <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like}>
         {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
-        <span className='comment-action'>{likes}</span>
+        <span className="comment-action">{likes}</span>
       </span>
     </Tooltip>,
-    <Tooltip key='comment-basic-dislike' title='Dislike'>
+    <Tooltip key="comment-basic-dislike" title="Dislike">
       <span onClick={dislike}>
         {React.createElement(
           action === "disliked" ? DislikeFilled : DislikeOutlined
         )}
-        <span className='comment-action'>{dislikes}</span>
+        <span className="comment-action">{dislikes}</span>
       </span>
     </Tooltip>,
-    <span key='comment-basic-reply-to'>Comment</span>,
+    <span key="comment-basic-reply-to">Comment</span>,
   ];
   return (
     <>

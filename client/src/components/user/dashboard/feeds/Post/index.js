@@ -14,20 +14,16 @@ import moment from "moment";
 import firebase from "firebase";
 import { userData } from "../../../../../firebase";
 const { TextArea } = Input;
-const newPostKey = firebase
-  .database()
-  .ref()
-  .child("posts")
-  .push().key;
+const newPostKey = firebase.database().ref().child("posts").push().key;
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
     header={
-      <Divider orientation='left'>
+      <Divider orientation="left">
         <Spin />
       </Divider>
     }
-    itemLayout='horizontal'
+    itemLayout="horizontal"
     renderItem={(props) => <Comment {...props} />}
   />
 );
@@ -43,10 +39,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </Form.Item>
     <Form.Item>
       <Button
-        htmlType='submit'
+        htmlType="submit"
         loading={submitting}
         onClick={onSubmit}
-        type='primary'
+        type="primary"
       >
         Post!
       </Button>

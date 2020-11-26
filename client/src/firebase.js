@@ -29,35 +29,7 @@ export const token = JSON.parse(sessionStorage.getItem("githubToken"));
 export const feedData = JSON.parse(sessionStorage.getItem("feed"));
 export const friendData = JSON.parse(sessionStorage.getItem("friends"));
 const provider = new firebase.auth.GithubAuthProvider();
-export const signInWithGithub = () => {
-  auth.signInWithPopup(provider).then(function(result) {
-    let token = result.credential.accessToken;
-    let user = result.additionalUserInfo.profile;
-    let userData = {
-      avatar_url: user.avatar_url,
-      login: user.login,
-      bio: user.bio,
-      repos: user.public_repos,
-      reposUrl: user.repos_url,
-      followers: user.followers,
-      followersUrl: user.followers_url,
-      following: user.following,
-      location: user.location,
-      profileUrl: user.html_url,
-      blog: user.blog,
-      name: user.name,
-      gists: user.gists_url,
-      createdAt: user.created_at,
-      company: user.company,
-      hireable: user.hireable,
-      lastUpdate: user.updated_at,
-      storage: user.disk_usage,
-    };
-    sessionStorage.setItem("githubToken", JSON.stringify(token));
-    sessionStorage.setItem("bootSpaceUser", JSON.stringify(userData));
-  });
-  getNewsFeed();
-};
+
 const getNewsFeed = () => {
   const postsRef = database.ref("feed/posts");
   postsRef.once("value").then((snapshot) => {
@@ -69,6 +41,42 @@ const getNewsFeed = () => {
     sessionStorage.setItem("feed", JSON.stringify(arr));
   });
 };
+
+export const signInWithGithub = () => {
+  auth
+    .signInWithPopup(provider)
+    .then((result) => {
+      let token = result.credential.accessToken;
+      let user = result.additionalUserInfo.profile;
+      let userData = {
+        avatar_url: user.avatar_url,
+        login: user.login,
+        bio: user.bio,
+        repos: user.public_repos,
+        reposUrl: user.repos_url,
+        followers: user.followers,
+        followersUrl: user.followers_url,
+        following: user.following,
+        location: user.location,
+        profileUrl: user.html_url,
+        blog: user.blog,
+        name: user.name,
+        gists: user.gists_url,
+        createdAt: user.created_at,
+        company: user.company,
+        hireable: user.hireable,
+        lastUpdate: user.updated_at,
+        storage: user.disk_usage,
+      };
+      sessionStorage.setItem("githubToken", JSON.stringify(token));
+      sessionStorage.setItem("bootSpaceUser", JSON.stringify(userData));
+      getNewsFeed();
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
+
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
 

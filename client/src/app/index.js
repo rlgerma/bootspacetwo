@@ -7,7 +7,7 @@ import "../styles/App.scss";
 const App = () => {
   const { Content } = Layout;
   return (
-    <Layout className='layout'>
+    <Layout className="layout">
       <Content style={{ paddingBottom: "2.5rem" }}>
         <UserProvider>
           <Application />

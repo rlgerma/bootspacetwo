@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../providers/UserProvider";
+import React, { useEffect, useState } from "react";
 
 import { token } from "../../firebase";
-import SideNav from "../../components/layout/SideNav";
 import Metrics from "../../components/user/dashboard/metrics";
 import PostFeed from "../../components/user/dashboard/feeds/Post";
 import GitHubFeed from "../../components/user/dashboard/feeds/GitHubFeed";
@@ -16,6 +14,7 @@ const UserHome = (props) => {
   const { TabPane } = Tabs;
   const { displayName } = user;
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -36,8 +35,8 @@ const UserHome = (props) => {
   }, []);
 
   return (
-    <div className='dashboard'>
-      {loading ? (
+    <div className="dashboard">
+      {user === null || user === undefined ? (
         <>
           <Skeleton active />
         </>
@@ -45,34 +44,31 @@ const UserHome = (props) => {
         <>
           <Metrics />
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col className='gutter-row' span={6} offset={1} flex={2}>
+            <Col className="gutter-row" span={6} offset={1} flex={2}>
               <Card>
                 <PostFeed />
               </Card>
             </Col>
-            <Col className='gutter-row' span={14} flex={2}>
+            <Col className="gutter-row" span={14} flex={2}>
               <Card
                 title={`Welcome back, ${displayName
                   .split(" ")
                   .slice(0, -1)
                   .join(" ")}`}
-                className='dashCard'
+                className="dashCard"
               >
-                <Tabs defaultActiveKey='1' centered>
-                  <TabPane tab='GitHub Feed' key='1'>
-                    <GitHubFeed user={user} />
+                <Tabs defaultActiveKey="1" centered>
+                  <TabPane tab="GitHub Feed" key="1">
+                    {loading ? <Skeleton active /> : <GitHubFeed user={user} />}
                   </TabPane>
-                  <TabPane tab='BootSpace Feed' key='2'>
+                  <TabPane tab="BootSpace Feed" key="2">
                     <BootSpaceFeed />
                   </TabPane>
-                  <TabPane tab='Twitter Feed' key='3'>
+                  <TabPane tab="Twitter Feed" key="3">
                     <TwitterFeed />
                   </TabPane>
                 </Tabs>
               </Card>{" "}
-            </Col>
-            <Col className='gutter-row' span={2} flex={1}>
-              <SideNav />
             </Col>
           </Row>
         </>
