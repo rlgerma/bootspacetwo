@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { signInWithGithub } from "../../../firebase";
 import { GithubFilled } from "@ant-design/icons";
-import { Card, Row, Col, Divider, Button, Tooltip } from "antd";
+import { Card, Row, Col, Button, Tooltip } from "antd";
 import fig from "../../../images/login-fig.jpeg";
-import fig2 from "../../../images/login-fig-two.jpeg";
-const SignIn = () => {
+const SignIn = (props) => {
   const [error] = useState(null);
 
   return (
-    <div className="signIn">
+    <div className='signIn'>
       <Row>
         <Col md={16} sm={24}>
           <Card
-            title="Commit to Connections"
+            title='Commit to Connections'
             headStyle={{ textAlign: "center", paddingLeft: "2.5em" }}
-            className="loginInfoCard"
+            className='loginInfoCard'
           >
             <Row>
               <Col md={8} />
@@ -61,8 +60,8 @@ const SignIn = () => {
           </Card>
         </Col>
         <Col md={8} sm={24}>
-          <Card title="Sign In" className="loginCard">
-            {error !== null && <div className="error">{error}</div>}
+          <Card title='Sign In' className='loginCard'>
+            {error !== null && <div className='error'>{error}</div>}
 
             <Button
               onClick={() => {
@@ -72,15 +71,15 @@ const SignIn = () => {
                   console.error("Error signing in with Github", error);
                 }
               }}
-              className="githubLogin"
+              className='githubLogin'
             >
               Sign In with GitHub <GithubFilled />
             </Button>
             <br />
-            <img src={fig} alt="figure" style={{ width: "75%" }} />
+            <img src={fig} alt='figure' style={{ width: "75%" }} />
             <br />
-            <Tooltip title="Whats GitHub?">
-              <a href="https://github.com/join">Don't have a GitHub account?</a>
+            <Tooltip title='Whats GitHub?'>
+              <a href='https://github.com/join'>Don't have a GitHub account?</a>
             </Tooltip>
           </Card>
         </Col>

@@ -16,16 +16,16 @@ const Application = () => {
       <Router>
         {user !== null && user !== undefined ? (
           <>
-            <UserHome user={user} path="/" />
-            <Profile user={user} path="/profile" />
+            <UserHome user={user} path='/' />
+            <Profile user={user} path='/profile' />
           </>
         ) : (
           <>
-            <Home path="/" />
-            <SignIn path="/signin" />
+            <Home path='/' />
+            <SignIn user={user} path='/signin' />
           </>
         )}
-        <Blog path="/blog" />
+        <Blog path='/blog' />
       </Router>
     </>
   );
