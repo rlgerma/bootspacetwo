@@ -1,11 +1,13 @@
 import firebase from "firebase/app";
-// eslint-disable-next-line
-
-import { navigate } from "@reach/router";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/performance";
 import "firebase/database";
+
+import Pipeless from "pipeless";
+
+import { navigate } from "@reach/router";
+
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -18,17 +20,39 @@ export const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.firestore().settings({ experimentalForceLongPolling: true });
 
 export const perf = firebase.performance();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const database = firebase.database();
+
 export const userData = JSON.parse(sessionStorage.getItem("bootSpaceUser"));
 export const token = JSON.parse(sessionStorage.getItem("githubToken"));
 export const feedData = JSON.parse(sessionStorage.getItem("feed"));
 export const friendData = JSON.parse(sessionStorage.getItem("friends"));
+
+const defaultClient = Pipeless.ApiClient.instance;
+
+let pipeApiKey = defaultClient.authentications["App_API_Key"];
+
+pipeApiKey.apiKey = `Bearer ${process.env.REACT_APP_PIPELESS_API_KEY}`;
+
 const provider = new firebase.auth.GithubAuthProvider();
+
+export const pipeApi = () => {
+  let api = new Pipeless.ActivityApi();
+  let appId = 1143;
+  let opts = {};
+
+  return (error, data, response) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("API called successfully. Returned data: " + data);
+      api.getActivityActionsFeed(appId, opts);
+    }
+  };
+};
 
 const getNewsFeed = () => {
   const postsRef = database.ref("feed/posts");
@@ -42,8 +66,8 @@ const getNewsFeed = () => {
   });
 };
 
-export const signInWithGithub = () => {
-  auth
+export const signInWithGithub = async () => {
+  await auth
     .signInWithPopup(provider)
     .then((result) => {
       let token = result.credential.accessToken;
@@ -75,6 +99,7 @@ export const signInWithGithub = () => {
     .catch((error) => {
       console.error(error.message);
     });
+  return;
 };
 
 export const generateUserDocument = async (user, additionalData) => {
@@ -111,9 +136,9 @@ const getUserDocument = async (uid) => {
     return {
       uid,
       ...userDocument.data(),
-      ...navigate("/"),
     };
   } catch (error) {
     console.error("Error fetching user", error);
   }
+  navigate("/");
 };
