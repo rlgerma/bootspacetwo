@@ -1,20 +1,15 @@
 # bootspace 2.0
 
-## - 11/19/20 - Sign in is currently disabled 😓 Check back soon!
+## - 11/19/20 - Sign in is currently disabled 😓 Check back soon
 
-## Now, with Firebase!
+## Now, with Firebase
 
-This is a new version of an old project I started with [Carina Ullman](https://github.com/carinaullman) that connects GitHub users on a social network platform. While GitHub is perfect in every way, we felt there was a need for a supplemental platform for its users to connect more to get to know each other on a more personal level. 
-
-## Changes from old version
-
-* Migrated from Heroku to Firebase.
-* Reduced dependencies.
-* Integration of cloud functions.
-* headless wordpress CMS for admin blog page
+This is a new version of an old project I started with [Carina Ullman](https://github.com/carinalullman) that connects GitHub users on a social network platform. While GitHub is perfect in every way, we felt there was a need for a supplemental platform for its users to connect more to get to know each other on a more personal level.
 
 ### Project Updates
-* see [projects](https://github.com/rlgerma92/bootspacetwo/projects) tab
 
-### Disclaimer 
-*This project is __not endorsed, sponsored__, or __approved__ by __GitHub__ and is solely a independent application for __social networking purposes__*
+- see [projects](https://github.com/rlgerma92/bootspacetwo/projects) tab
+
+### Disclaimer
+
+_This project is **not endorsed, sponsored**, or **approved** by **GitHub** and is solely a independent application for **social networking purposes**_
