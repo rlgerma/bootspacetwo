@@ -14,7 +14,7 @@ const Application = () => {
     <>
       <NavBar user={user} />
       <Router>
-        {user !== null && user !== undefined ? (
+        {user !== null ? (
           <>
             <UserHome user={user} path='/' />
             <Profile user={user} path='/profile' />

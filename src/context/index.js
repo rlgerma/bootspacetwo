@@ -1,8 +1,8 @@
 import React, { useEffect, useState, createContext } from "react";
-import { auth, firestore } from "../firebase";
+import { db, auth, firestore } from "../firebase";
 import { useDispatch } from "react-redux";
 
-import { SET_USER } from "../redux/actions/";
+import { SET_USER, SET_POSTS } from "../redux/actions/";
 
 export const UserContext = createContext();
 
@@ -11,7 +11,6 @@ export const UserProvider = ({ children }) => {
 
   const [authUser, setAuthUser] = useState(null);
   const [pending, setPending] = useState(true);
-  const [show, setShow] = useState(true);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -24,19 +23,16 @@ export const UserProvider = ({ children }) => {
     });
   }, []);
 
-  const generateUserDocument = async (user, userInfo) => {
-    if (!user) return;
-
+  const generateUserDocument = async (user) => {
     const { uid } = user;
 
-    const userRef = firestore.doc(`users/${uid}`);
+    const userRef = db.doc(`users/${uid}`);
     const snapshot = await userRef.get();
-    const { email, displayName } = user;
 
     if (!snapshot.exists) {
-      const { email } = user;
-      const firstName = user.displayName.split(" ").slice(0, -1).join(" ");
-      const lastName = user.displayName.split(" ").slice(-1).join(" ");
+      const { email, displayName } = user;
+      const firstName = displayName.split(" ").slice(0, -1).join(" ");
+      const lastName = displayName.split(" ").slice(-1).join(" ");
       try {
         await userRef.set(
           {
@@ -58,4 +54,37 @@ export const UserProvider = ({ children }) => {
       return functions.getUserDocument(user.uid);
     }
   };
+
+  const getUserDocument = (uid) => {
+    const userRef = db.doc(`users/${uid}`);
+
+    if (!uid) return null;
+
+    userRef.onSnapshot((snap) => {
+      dispatch({
+        type: SET_USER,
+        payload: snap.data(),
+      });
+    });
+  };
+
+  let functions = {
+    generateUserDocument,
+    getUserDocument,
+  };
+
+  if (pending) {
+    return <p>Loading</p>;
+  } else {
+    return (
+      <UserContext.Provider
+        value={{
+          authUser,
+          functions,
+        }}
+      >
+        {children}
+      </UserContext.Provider>
+    );
+  }
 };
