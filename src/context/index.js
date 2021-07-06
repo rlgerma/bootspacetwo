@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import { db, auth, firestore } from "../firebase";
 import { useDispatch } from "react-redux";
 
-import { SET_USER, SET_POSTS } from "../redux/actions/";
+import { SET_USER } from "../redux/actions/";
 
 export const UserContext = createContext();
 
@@ -15,43 +15,47 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setAuthUser(user);
-      setTimeout(() => {
+      const wait = setTimeout(() => {
         setPending(false);
       }, 2000);
 
-      return () => clearTimeout();
+      return () => clearTimeout(wait);
     });
   }, []);
 
-  const generateUserDocument = async (user) => {
-    const { uid } = user;
+  const generateUserDocument = async (res) => {
+    try {
+      const { uid } = res.user;
 
-    const userRef = db.doc(`users/${uid}`);
-    const snapshot = await userRef.get();
+      const userRef = db.doc(`users/${uid}`);
+      const snapshot = await userRef.get();
 
-    if (!snapshot.exists) {
-      const { email, displayName } = user;
-      const firstName = displayName.split(" ").slice(0, -1).join(" ");
-      const lastName = displayName.split(" ").slice(-1).join(" ");
-      try {
-        await userRef.set(
-          {
-            active: true,
-            createdOn: firestore.FieldValue.serverTimestamp(),
-            email,
-            firstName,
-            lastName,
-            profilePic: null,
-          },
-          { merge: true }
-        );
+      if (!snapshot.exists) {
+        const { email, displayName } = res.user;
+        const firstName = displayName.split(" ").slice(0, -1).join(" ");
+        const lastName = displayName.split(" ").slice(-1).join(" ");
+        try {
+          await userRef.set(
+            {
+              active: true,
+              createdOn: firestore.FieldValue.serverTimestamp(),
+              email,
+              firstName,
+              lastName,
+              profilePic: res.additionalUserInfo.profile.avatar_url,
+            },
+            { merge: true }
+          );
 
-        return functions.getUserDocument(user.uid);
-      } catch (error) {
-        console.error("Error creating user document", error);
+          return functions.getUserDocument(uid);
+        } catch (error) {
+          console.error("Error creating user document", error);
+        }
+      } else if (snapshot.exists) {
+        return functions.getUserDocument(uid);
       }
-    } else if (snapshot.exists) {
-      return functions.getUserDocument(user.uid);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -68,7 +72,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  let functions = {
+  const functions = {
     generateUserDocument,
     getUserDocument,
   };

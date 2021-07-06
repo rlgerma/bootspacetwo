@@ -1,11 +1,24 @@
-import React, { useState } from "react";
-import { signInWithGithub } from "../../../firebase";
+import React, { useCallback, useContext, useState } from "react";
+import { UserContext } from "../../../context";
+import { auth, gitHubProvider } from "../../../firebase";
 import { GithubFilled } from "@ant-design/icons";
 import { Card, Row, Col, Button, Tooltip } from "antd";
 import fig from "../../../images/login-fig.jpeg";
-const SignIn = (props) => {
-  const [error] = useState(null);
 
+const Login = () => {
+  const [error] = useState(null);
+  const { functions } = useContext(UserContext);
+  const signInWithGithub = useCallback(async () => {
+    try {
+      // sign in
+      await auth.signInWithPopup(gitHubProvider).then((res) => {
+        console.log(res);
+        functions.generateUserDocument(res);
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }, [functions]);
   return (
     <div className='signIn'>
       <Row>
@@ -87,4 +100,4 @@ const SignIn = (props) => {
     </div>
   );
 };
-export default SignIn;
+export default Login;

@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "@reach/router";
-import logo from "../../images/BootSpaceTrans.png";
 import { auth } from "../../firebase";
-
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
 import {
   HomeOutlined,
   UserOutlined,
@@ -10,28 +10,29 @@ import {
   LoginOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
+import logo from "../../images/BootSpaceTrans.png";
 
-const NavBar = (props) => {
+const NavBar = () => {
   const { Option } = Select;
-
+  const userDoc = useSelector((state) => state.user);
+  const user = userDoc?.user;
   return (
     <nav>
       <Card>
         <Row>
           <Col md={8} sm={24}>
-            <Link to="/">
-              <img src={logo} alt="bootspace" className="logo" />
+            <Link to='/'>
+              <img src={logo} alt='bootspace' className='logo' />
             </Link>
           </Col>
           <Col md={8} sm={24} />
           <Col md={8} sm={24}>
-            <Input.Group className="navSearch">
-              <AutoComplete placeholder="Search for" style={{ width: "75%" }} />
-              <Select defaultValue="Posts">
-                <Option value="Posts">Posts</Option>
-                <Option value="Users">Users</Option>
-                <Option value="Groups">Groups</Option>
+            <Input.Group className='navSearch'>
+              <AutoComplete placeholder='Search for' style={{ width: "75%" }} />
+              <Select defaultValue='Posts'>
+                <Option value='Posts'>Posts</Option>
+                <Option value='Users'>Users</Option>
+                <Option value='Groups'>Groups</Option>
               </Select>
             </Input.Group>
           </Col>
@@ -39,29 +40,24 @@ const NavBar = (props) => {
         <Row>
           <Col md={16} sm={24} />
           <Col md={8} sm={24}>
-            <div className="navLinks">
-              <Link to="/">
+            <div className='navLinks'>
+              <Link to='/'>
                 <HomeOutlined /> home
               </Link>
-              {props.user !== undefined ? (
-                <Link to="/profile">
+              {user && (
+                <Link to='/profile'>
                   <UserOutlined /> profile
                 </Link>
-              ) : null}
-              <Link to="/blog">
+              )}
+              <Link to='/blog'>
                 <ReadOutlined /> blog
               </Link>
-              {props.user !== undefined ? (
-                <Link
-                  to="/"
-                  onClick={() => {
-                    auth.signOut();
-                  }}
-                >
+              {user ? (
+                <Link to='/' onClick={() => auth.signOut()}>
                   <LogoutOutlined /> log-out
                 </Link>
               ) : (
-                <Link to="/signin">
+                <Link to='/login'>
                   <LoginOutlined /> login
                 </Link>
               )}

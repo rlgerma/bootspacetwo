@@ -10,20 +10,22 @@ import {
   Spin,
 } from "antd";
 import { Skeleton } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import firebase from "firebase";
-import { userData } from "../../../../../firebase";
 const { TextArea } = Input;
 const newPostKey = firebase.database().ref().child("posts").push().key;
+
+const userData = null;
+
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
     header={
-      <Divider orientation="left">
+      <Divider orientation='left'>
         <Spin />
       </Divider>
     }
-    itemLayout="horizontal"
+    itemLayout='horizontal'
     renderItem={(props) => <Comment {...props} />}
   />
 );
@@ -39,10 +41,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </Form.Item>
     <Form.Item>
       <Button
-        htmlType="submit"
+        htmlType='submit'
         loading={submitting}
         onClick={onSubmit}
-        type="primary"
+        type='primary'
       >
         Post!
       </Button>
@@ -74,7 +76,7 @@ class PostFeed extends React.Component {
           author: `${userData.name}`,
           avatar: `${userData.avatar_url}`,
           content: `${this.state.value}`,
-          datetime: moment().format("LLL"),
+          datetime: dayjs().format("LLL"),
         });
       this.setState({
         submitting: false,
@@ -84,7 +86,7 @@ class PostFeed extends React.Component {
             author: `${userData.name}`,
             avatar: `${userData.avatar_url}`,
             content: <p>{this.state.value}</p>,
-            datetime: moment().fromNow(),
+            datetime: dayjs().fromNow(),
           },
           ...this.state.comments,
         ],
