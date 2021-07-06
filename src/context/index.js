@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import { db, auth, firestore } from "../firebase";
 import { useDispatch } from "react-redux";
 
-import { SET_USER, SET_POSTS } from "../redux/actions/";
+import { SET_USER } from "../redux/actions/";
 
 export const UserContext = createContext();
 
@@ -15,15 +15,18 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setAuthUser(user);
-      setTimeout(() => {
+      const wait = setTimeout(() => {
         setPending(false);
       }, 2000);
 
-      return () => clearTimeout();
+      return () => clearTimeout(wait);
     });
   }, []);
 
   const generateUserDocument = async (user) => {
+    try{
+
+
     const { uid } = user;
 
     const userRef = db.doc(`users/${uid}`);
@@ -53,6 +56,9 @@ export const UserProvider = ({ children }) => {
     } else if (snapshot.exists) {
       return functions.getUserDocument(user.uid);
     }
+  }catch(error) {
+    console.error(error)
+  }
   };
 
   const getUserDocument = (uid) => {
