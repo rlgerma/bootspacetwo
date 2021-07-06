@@ -22,7 +22,4 @@ export const firestore = firebase.firestore;
 export const gitHubProvider = new firebase.auth.GithubAuthProvider();
 export const perf = firebase.performance();
 
-export const userData = JSON.parse(sessionStorage.getItem("bootSpaceUser"));
 export const token = JSON.parse(sessionStorage.getItem("githubToken"));
-export const feedData = JSON.parse(sessionStorage.getItem("feed"));
-export const friendData = JSON.parse(sessionStorage.getItem("friends"));

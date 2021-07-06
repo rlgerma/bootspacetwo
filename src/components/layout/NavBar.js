@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import logo from "../../images/BootSpaceTrans.png";
 import { auth } from "../../firebase";
-
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
 import {
   HomeOutlined,
   UserOutlined,
@@ -10,11 +10,12 @@ import {
   LoginOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
+import logo from "../../images/BootSpaceTrans.png";
 
-const NavBar = (props) => {
+const NavBar = () => {
   const { Option } = Select;
-
+  const userDoc = useSelector((state) => state.user);
+  const user = userDoc?.user;
   return (
     <nav>
       <Card>
@@ -43,21 +44,16 @@ const NavBar = (props) => {
               <Link to='/'>
                 <HomeOutlined /> home
               </Link>
-              {props.user !== undefined ? (
+              {user && (
                 <Link to='/profile'>
                   <UserOutlined /> profile
                 </Link>
-              ) : null}
+              )}
               <Link to='/blog'>
                 <ReadOutlined /> blog
               </Link>
-              {props.user !== undefined ? (
-                <Link
-                  to='/'
-                  onClick={() => {
-                    auth.signOut();
-                  }}
-                >
+              {user ? (
+                <Link to='/' onClick={() => auth.signOut()}>
                   <LogoutOutlined /> log-out
                 </Link>
               ) : (

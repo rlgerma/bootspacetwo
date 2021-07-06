@@ -12,7 +12,8 @@ const Login = () => {
     try {
       // sign in
       await auth.signInWithPopup(gitHubProvider).then((res) => {
-        functions.generateUserDocument(res.user);
+        console.log(res);
+        functions.generateUserDocument(res);
       });
     } catch (err) {
       console.error(err);

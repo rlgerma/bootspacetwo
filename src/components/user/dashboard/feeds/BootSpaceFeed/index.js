@@ -1,15 +1,16 @@
 import React, { createElement, useState } from "react";
 import { Row, Comment, Tooltip, Avatar, Skeleton } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   DislikeOutlined,
   LikeOutlined,
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
-import { feedData } from "../../../../../firebase";
 
 const BootSpaceFeed = () => {
+  const feedData = null;
+
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
@@ -26,21 +27,21 @@ const BootSpaceFeed = () => {
   };
 
   const actions = [
-    <Tooltip key="comment-basic-like" title="Like">
+    <Tooltip key='comment-basic-like' title='Like'>
       <span onClick={like}>
         {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
-        <span className="comment-action">{likes}</span>
+        <span className='comment-action'>{likes}</span>
       </span>
     </Tooltip>,
-    <Tooltip key="comment-basic-dislike" title="Dislike">
+    <Tooltip key='comment-basic-dislike' title='Dislike'>
       <span onClick={dislike}>
         {React.createElement(
           action === "disliked" ? DislikeFilled : DislikeOutlined
         )}
-        <span className="comment-action">{dislikes}</span>
+        <span className='comment-action'>{dislikes}</span>
       </span>
     </Tooltip>,
-    <span key="comment-basic-reply-to">Comment</span>,
+    <span key='comment-basic-reply-to'>Comment</span>,
   ];
   return (
     <>
@@ -58,7 +59,7 @@ const BootSpaceFeed = () => {
                   avatar={<Avatar src={item.avatar} alt={item.author} />}
                   content={<p>{item.content}</p>}
                   datetime={
-                    <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
+                    <Tooltip title={dayjs().format("YYYY-MM-DD HH:mm")}>
                       <span>{item.datetime}</span>
                     </Tooltip>
                   }

@@ -23,42 +23,40 @@ export const UserProvider = ({ children }) => {
     });
   }, []);
 
-  const generateUserDocument = async (user) => {
-    try{
+  const generateUserDocument = async (res) => {
+    try {
+      const { uid } = res.user;
 
+      const userRef = db.doc(`users/${uid}`);
+      const snapshot = await userRef.get();
 
-    const { uid } = user;
+      if (!snapshot.exists) {
+        const { email, displayName } = res.user;
+        const firstName = displayName.split(" ").slice(0, -1).join(" ");
+        const lastName = displayName.split(" ").slice(-1).join(" ");
+        try {
+          await userRef.set(
+            {
+              active: true,
+              createdOn: firestore.FieldValue.serverTimestamp(),
+              email,
+              firstName,
+              lastName,
+              profilePic: res.additionalUserInfo.profile.avatar_url,
+            },
+            { merge: true }
+          );
 
-    const userRef = db.doc(`users/${uid}`);
-    const snapshot = await userRef.get();
-
-    if (!snapshot.exists) {
-      const { email, displayName } = user;
-      const firstName = displayName.split(" ").slice(0, -1).join(" ");
-      const lastName = displayName.split(" ").slice(-1).join(" ");
-      try {
-        await userRef.set(
-          {
-            active: true,
-            createdOn: firestore.FieldValue.serverTimestamp(),
-            email,
-            firstName,
-            lastName,
-            profilePic: null,
-          },
-          { merge: true }
-        );
-
-        return functions.getUserDocument(user.uid);
-      } catch (error) {
-        console.error("Error creating user document", error);
+          return functions.getUserDocument(uid);
+        } catch (error) {
+          console.error("Error creating user document", error);
+        }
+      } else if (snapshot.exists) {
+        return functions.getUserDocument(uid);
       }
-    } else if (snapshot.exists) {
-      return functions.getUserDocument(user.uid);
+    } catch (error) {
+      console.error(error);
     }
-  }catch(error) {
-    console.error(error)
-  }
   };
 
   const getUserDocument = (uid) => {
@@ -74,7 +72,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  let functions = {
+  const functions = {
     generateUserDocument,
     getUserDocument,
   };

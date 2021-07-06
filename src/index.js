@@ -11,6 +11,7 @@ import { UserProvider } from "./context";
 import store from "./redux/store";
 import { Layout } from "antd";
 import "./styles/App.scss";
+
 ReactDOM.render(
   <StateProvider store={store}>
     <UserProvider>

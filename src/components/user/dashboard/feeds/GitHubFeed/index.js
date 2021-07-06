@@ -1,13 +1,13 @@
 import React, { createElement, useEffect, useState } from "react";
 import { Row, Comment, Tooltip, Avatar, Skeleton } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   DislikeOutlined,
   LikeOutlined,
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
-import { userData, token } from "../../../../../firebase";
+import { token } from "../../../../../firebase";
 
 const GitHubFeed = () => {
   const [error, setError] = useState(null);
@@ -16,12 +16,11 @@ const GitHubFeed = () => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const userData = null;
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
-      const someData = await userData;
-      const events = `https://api.github.com/users/${someData.login}/received_events`;
+      const events = `https://api.github.com/users/${userData?.login}/received_events`;
       fetch(events, {
         headers: {
           Authorization: `token ${token}`,
@@ -101,8 +100,8 @@ const GitHubFeed = () => {
                     </p>
                   }
                   datetime={
-                    <Tooltip title={moment().format("YYYY-MM-DD HH:mm")}>
-                      <span>{moment(user.created_at).fromNow()}</span>
+                    <Tooltip title={dayjs().format("YYYY-MM-DD HH:mm")}>
+                      <span>{dayjs(user.created_at).fromNow()}</span>
                     </Tooltip>
                   }
                 />
