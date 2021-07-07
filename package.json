@@ -9,7 +9,7 @@
     "@octokit/rest": "^18.6.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/user-event": "^13.1.9",
     "animate.css": "^4.1.0",
     "antd": "4.2.4",
     "dayjs": "^1.10.6",
