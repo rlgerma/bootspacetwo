@@ -5,7 +5,7 @@ import { UserContext } from "../../context";
 import UserHome from "./UserHome";
 
 import { Row, Col, Card } from "antd";
-import fig from "../../images/home-fig.jpeg";
+import fig from "../../assets/images/home-fig.jpeg";
 
 const Home = () => {
   const { authUser } = useContext(UserContext);

@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import { db, auth, firestore } from "../firebase";
 import { useDispatch } from "react-redux";
 
-import { SET_USER } from "../redux/actions/";
+import { SET_USER, SET_POSTS } from "../redux/actions/";
 
 export const UserContext = createContext();
 
@@ -82,10 +82,33 @@ export const UserProvider = ({ children }) => {
       });
     });
   };
+  const getPosts = async () => {
+    try {
+      return await db
+        .collection("feed")
+        .get()
+        .then((snap) =>
+          (async (snap, arr) => {
+            for await (let doc of snap) {
+              arr.push(doc.data());
+            }
+            return arr;
+          })(snap, []).then((posts) =>
+            dispatch({
+              type: SET_POSTS,
+              payload: posts,
+            })
+          )
+        );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const functions = {
     generateUserDocument,
     getUserDocument,
+    getPosts,
   };
 
   if (pending) {

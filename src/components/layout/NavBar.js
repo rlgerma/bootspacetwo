@@ -10,7 +10,7 @@ import {
   LoginOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import logo from "../../images/BootSpaceTrans.png";
+import logo from "../../assets/images/BootSpaceTrans.png";
 
 const NavBar = () => {
   const { Option } = Select;
@@ -40,15 +40,9 @@ const NavBar = () => {
           <Col md={16} sm={24} />
           <Col md={8} sm={24}>
             <div className='navLinks'>
-              {authUser ? (
-                <Link to='/home'>
-                  <HomeOutlined /> home
-                </Link>
-              ) : (
-                <Link to='/'>
-                  <HomeOutlined /> home
-                </Link>
-              )}
+              <Link to='/'>
+                <HomeOutlined /> home
+              </Link>
               {authUser && (
                 <Link to='/profile'>
                   <UserOutlined /> profile
