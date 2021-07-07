@@ -15,11 +15,23 @@ export const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+firebase
+  .firestore()
+  .enablePersistence()
+  .catch((error) =>
+    error.code === "failed-precondition"
+      ? console.warn(
+          "Persistence enabled for single tab use. To enable persistence please close all but one tab for this application."
+        )
+      : error.code === "unimplemented"
+      ? console.warn(
+          "The current browser does not support all of the features required to enable persistence"
+        )
+      : console.warn(error.message)
+  );
 export const auth = firebase.auth();
 export const db = firebase.firestore();
 export const firestore = firebase.firestore;
 export const gitHubProvider = new firebase.auth.GithubAuthProvider();
 export const perf = firebase.performance();
-
-export const token = JSON.parse(sessionStorage.getItem("githubToken"));
+export const statePersistence = firebase.auth;

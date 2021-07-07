@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { auth } from "../../firebase";
-import { useSelector } from "react-redux";
+import { UserContext } from "../../context";
 import { Link } from "react-router-dom";
 import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
 import {
@@ -14,8 +14,7 @@ import logo from "../../images/BootSpaceTrans.png";
 
 const NavBar = () => {
   const { Option } = Select;
-  const userDoc = useSelector((state) => state.user);
-  const user = userDoc?.userDoc ?? null;
+  const { authUser } = useContext(UserContext);
   return (
     <nav>
       <Card>
@@ -41,7 +40,7 @@ const NavBar = () => {
           <Col md={16} sm={24} />
           <Col md={8} sm={24}>
             <div className='navLinks'>
-              {user ? (
+              {authUser ? (
                 <Link to='/home'>
                   <HomeOutlined /> home
                 </Link>
@@ -50,7 +49,7 @@ const NavBar = () => {
                   <HomeOutlined /> home
                 </Link>
               )}
-              {user && (
+              {authUser && (
                 <Link to='/profile'>
                   <UserOutlined /> profile
                 </Link>
@@ -58,7 +57,7 @@ const NavBar = () => {
               <Link to='/blog'>
                 <ReadOutlined /> blog
               </Link>
-              {user ? (
+              {authUser ? (
                 <Link to='/' onClick={() => auth.signOut()}>
                   <LogoutOutlined /> log-out
                 </Link>

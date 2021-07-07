@@ -1,25 +1,28 @@
-import React, { useCallback, useContext, useState } from "react";
-import { UserContext } from "../../../context";
-import { auth, gitHubProvider } from "../../../firebase";
+import React, { useCallback, useContext } from "react";
+import { Redirect } from "react-router";
+import { UserContext } from "../../context";
+import { auth, gitHubProvider } from "../../firebase";
 import { GithubFilled } from "@ant-design/icons";
 import { Card, Row, Col, Button, Tooltip } from "antd";
-import fig from "../../../images/login-fig.jpeg";
+import fig from "../../assets/images/login-fig.jpeg";
 
 const Login = () => {
-  const [error] = useState(null);
-  const { functions } = useContext(UserContext);
+  const { functions, authUser } = useContext(UserContext);
+
   const signInWithGithub = useCallback(async () => {
     try {
-      // sign in
-      await auth.signInWithPopup(gitHubProvider).then((res) => {
-        console.log(res);
-        functions.generateUserDocument(res);
-      });
+      await auth
+        .signInWithPopup(gitHubProvider)
+        .then((res) => functions.generateUserDocument(res))
+        .catch((error) => console.error(error));
     } catch (err) {
       console.error(err);
     }
   }, [functions]);
-  return (
+
+  return authUser ? (
+    <Redirect to='/' />
+  ) : (
     <div className='signIn'>
       <Row>
         <Col md={16} sm={24}>
@@ -74,8 +77,6 @@ const Login = () => {
         </Col>
         <Col md={8} sm={24}>
           <Card title='Sign In' className='loginCard'>
-            {error !== null && <div className='error'>{error}</div>}
-
             <Button
               onClick={() => {
                 try {

@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ProtectedRoute from "../protected";
 import Home from "../pages/Home";
 import Blog from "../pages/Blog";
-import UserHome from "../pages/User/UserHome";
-import Profile from "../pages/User/Profile";
+import UserHome from "../pages/Home/UserHome";
+import Profile from "../pages/Profile/";
 import NavBar from "../components/layout/NavBar";
-import Login from "../components/user/auth/SignIn";
+import Login from "../components/auth/SignIn";
 
 const App = () => (
   <Router>

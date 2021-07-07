@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Metrics from "../../components/user/dashboard/metrics";
-import PostFeed from "../../components/user/dashboard/feeds/Post";
-import GitHubFeed from "../../components/user/dashboard/feeds/GitHubFeed";
-import BootSpaceFeed from "../../components/user/dashboard/feeds/BootSpaceFeed";
-import TwitterFeed from "../../components/user/dashboard/feeds/TwitterFeed";
+
+import Metrics from "../../components/metrics";
+import Post from "../../components/post";
+import GitHubFeed from "../../components/feeds/GitHubFeed";
+import BootSpaceFeed from "../../components/feeds/BootSpaceFeed";
+import TwitterFeed from "../../components/feeds/TwitterFeed";
+
 import { Skeleton } from "antd";
 import { Card, Row, Col, Tabs } from "antd";
 
-const UserHome = (props) => {
+const UserHome = () => {
   const { TabPane } = Tabs;
-  const { userDoc } = useSelector((state) => state.user);
+  const userDoc = useSelector((state) => state.user?.userDoc);
   const { token, received_events_url, firstName } = userDoc;
   const [loaded, setLoaded] = useState(false);
   const [feed, setFeed] = useState([]);
@@ -37,7 +39,7 @@ const UserHome = (props) => {
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               <Col className='gutter-row' span={6} offset={1} flex={2}>
                 <Card>
-                  <PostFeed />
+                  <Post user={userDoc} />
                 </Card>
               </Col>
               <Col className='gutter-row' span={14} flex={2}>
@@ -50,10 +52,10 @@ const UserHome = (props) => {
                       <BootSpaceFeed />
                     </TabPane>
                     <TabPane tab='Twitter Feed' key='3'>
-                      <TwitterFeed />
+                      <TwitterFeed twitter={userDoc.twitter_username} />
                     </TabPane>
                   </Tabs>
-                </Card>{" "}
+                </Card>
               </Col>
             </Row>
           </>
