@@ -14,7 +14,7 @@ const App = () => (
     <Route component={Home} exact path='/' />
     <Route component={Login} exact path='/login' />
     <Route component={Blog} exact path='/blog' />
-    <ProtectedRoute component={UserHome} exact path='/' />
+    <ProtectedRoute component={UserHome} exact path='/home' />
     <ProtectedRoute component={Profile} exact path='/profile' />
   </Router>
 );

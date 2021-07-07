@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useState } from "react";
+import React, { createElement, useState } from "react";
 import { Row, Comment, Tooltip, Avatar, Skeleton } from "antd";
 import dayjs from "dayjs";
 import {
@@ -7,43 +7,11 @@ import {
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
-import { token } from "../../../../../firebase";
 
-const GitHubFeed = () => {
-  const [error, setError] = useState(null);
+const GitHubFeed = ({ feed }) => {
   const [action, setAction] = useState(null);
-  const [data, setData] = useState([]);
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const userData = null;
-  useEffect(() => {
-    setLoading(true);
-    const getData = async () => {
-      const events = `https://api.github.com/users/${userData?.login}/received_events`;
-      fetch(events, {
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          let data = [];
-          data.push(result);
-
-          setData(data[0]);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-        });
-    };
-    if (userData !== null) {
-      getData();
-    } else {
-      console.log("loading...");
-    }
-  }, []);
 
   const like = () => {
     setLikes(1);
@@ -76,13 +44,12 @@ const GitHubFeed = () => {
   ];
   return (
     <>
-      {loading ? (
+      {feed === undefined ? (
         <Skeleton active />
       ) : (
         <>
-          {error && <div>{error}</div>}
           <ul>
-            {data.map((user) => (
+            {feed.map((user) => (
               <Row key={user.id}>
                 <Comment
                   actions={actions}
@@ -101,7 +68,7 @@ const GitHubFeed = () => {
                   }
                   datetime={
                     <Tooltip title={dayjs().format("YYYY-MM-DD HH:mm")}>
-                      <span>{dayjs(user.created_at).fromNow()}</span>
+                      <span>{dayjs(user.created_at).format()}</span>
                     </Tooltip>
                   }
                 />

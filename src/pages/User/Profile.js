@@ -1,32 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Card, Row, Col, Divider, Space, Skeleton } from "antd";
-import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+
 const Profile = () => {
-  const friendData = null;
-  const userData = null;
+  const user = useSelector((state) => state.user);
+  const userDoc = user?.userDoc ?? null;
+  const [loaded, setLoaded] = useState(false);
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    (async () =>
+      await fetch(`${userDoc.followers_url}`, {
+        headers: {
+          Authorization: `token ${userDoc.token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((json) => setFriends(json))
+        .then(() => setLoaded(true))
+        .catch((error) => console.error(error)))();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className='main'>
-      {userData !== null ? (
+      {userDoc !== null ? (
         <div className='profilePage'>
           <Row>
             <Col className='profileLeft'>
-              <Card title={userData.name} className='profileCard'>
-                <img src={userData.avatar_url} alt='Profile' />
+              <Card title={userDoc.name} className='profileCard'>
+                <img src={userDoc.avatar_url} alt='Profile' />
               </Card>
-              <Card title={userData.company} className='underCard'>
-                <p>{userData.location}</p>
+              <Card title={userDoc.company} className='underCard'>
+                <p>{userDoc.location}</p>
                 <p>
                   Last Login:{" "}
-                  <span className='lastLog'>{dayjs().format("LLL")}</span>
+                  <span className='lastLog'>
+                    {dayjs(`${userDoc.updated_at}`).format("MMM DD, YYYY")}
+                  </span>
                 </p>
 
                 <div className='underCardLinks'>
-                  <Divider plain>Contact {userData.name}</Divider>
+                  <Divider plain>Contact {userDoc.name}</Divider>
                   <Row>
                     <Col className='gutter-row' span={12} offset={1} flex={2}>
-                      <a href={userData.email}>Send message</a>
+                      <a href={userDoc.email}>Send message</a>
                     </Col>
                     <Col className='gutter-row' span={12} offset={1} flex={3}>
                       <a href='/#'>Add to Friends</a>
@@ -46,33 +65,33 @@ const Profile = () => {
             <Col className='profileRight'>
               <Card title='About Me' className='infoCard'>
                 <p>
-                  Website: {userData.blog}
+                  Website: {userDoc.blog}
                   <br />
                   <a
-                    href={`https://github.com/${userData.login}?tab=repositories`}
+                    href={`https://github.com/${userDoc.login}?tab=repositories`}
                   >
                     Repos
                   </a>{" "}
                   |{" "}
-                  <a href={`https://gist.github.com/${userData.login}`}>
-                    Gists
-                  </a>
+                  <a href={`https://gist.github.com/${userDoc.login}`}>Gists</a>
                 </p>
                 <div className='userUrl'>
                   <h4>
                     GitHub URL:{" "}
-                    <Link to={userData.profileUrl}>{userData.profileUrl}</Link>
+                    <a
+                      href={`https://github.com/${userDoc.login}`}
+                    >{`https://github.com/${userDoc.login}`}</a>
                   </h4>
                 </div>
               </Card>{" "}
               <Card>
                 <Divider orientation='center' plain>
-                  {userData.name}'s followers
+                  {userDoc.name}'s followers
                 </Divider>
                 <div className='friendList'>
-                  {friendData !== null ? (
+                  {loaded ? (
                     <>
-                      {friendData.map((item) => (
+                      {friends.map((item) => (
                         <Space direction='vertical' key={item.login}>
                           <Card title={item.login} className='friendCard'>
                             <img src={item.avatar_url} alt='Profile' />

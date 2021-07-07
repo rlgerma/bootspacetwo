@@ -15,7 +15,7 @@ import logo from "../../images/BootSpaceTrans.png";
 const NavBar = () => {
   const { Option } = Select;
   const userDoc = useSelector((state) => state.user);
-  const user = userDoc?.user;
+  const user = userDoc?.userDoc ?? null;
   return (
     <nav>
       <Card>
@@ -41,9 +41,15 @@ const NavBar = () => {
           <Col md={16} sm={24} />
           <Col md={8} sm={24}>
             <div className='navLinks'>
-              <Link to='/'>
-                <HomeOutlined /> home
-              </Link>
+              {user ? (
+                <Link to='/home'>
+                  <HomeOutlined /> home
+                </Link>
+              ) : (
+                <Link to='/'>
+                  <HomeOutlined /> home
+                </Link>
+              )}
               {user && (
                 <Link to='/profile'>
                   <UserOutlined /> profile
