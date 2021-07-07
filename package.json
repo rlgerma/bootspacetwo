@@ -13,7 +13,7 @@
     "animate.css": "^4.1.0",
     "antd": "4.16.6",
     "dayjs": "^1.10.6",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "firebase": "^8.7.0",
     "node-sass": "6.0.1",
     "pipeless": "^1.0.7",
