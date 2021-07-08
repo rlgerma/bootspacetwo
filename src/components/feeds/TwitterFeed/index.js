@@ -2,27 +2,27 @@ import React from "react";
 import { Spin } from "antd";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 
-const TwitterFeed = () => {
+const TwitterFeed = ({ twitter }) => {
   return (
     <section
-      className="twitterContainer"
+      className='twitterContainer'
       style={{ margin: "2.5% auto", textAlign: "center" }}
     >
-      <div className="twitter-embed">
+      <div className='twitter-embed'>
         <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="rickygermaine"
+          sourceType='profile'
+          screenName={`${twitter}`}
           options={{
             tweetLimit: "10",
             width: "75%",
             height: "auto",
           }}
-          theme="light"
+          theme='light'
           noHeader={true}
           noBorders={true}
           noFooter={true}
           placeholder={<Spin />}
-        ></TwitterTimelineEmbed>
+        />
       </div>
     </section>
   );
