@@ -6,9 +6,10 @@ const BootSpaceFeed = ({ feed }) => {
   console.log(feed);
   return feed ? (
     <>
-      {feed.map((post) => (
+      {feed.map((post, index) => (
         <Comment
-          author={<a>Han Solo</a>}
+          key={index}
+          author='Han Solo'
           avatar={
             <Avatar
               src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'

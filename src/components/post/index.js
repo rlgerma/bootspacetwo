@@ -47,25 +47,21 @@ const Post = ({ user }) => {
 
   const handleInput = (event) => setPost(event.currentTarget.value);
 
-  return (
+  return !user ? (
+    <Skeleton />
+  ) : (
     <>
-      {user === null ? (
-        <Skeleton />
-      ) : (
-        <>
-          <h3>New post</h3>
+      <h3>New post</h3>
 
-          <TextArea
-            rows={4}
-            onChange={(event) => handleInput(event)}
-            value={post}
-          />
+      <TextArea
+        rows={4}
+        onChange={(event) => handleInput(event)}
+        value={post}
+      />
 
-          <Button onClick={(event) => submitPost(event, post)}>Post</Button>
-          {success !== "" && <p>{success}</p>}
-          {err !== "" && <p>{err}</p>}
-        </>
-      )}
+      <Button onClick={(event) => submitPost(event, post)}>Post</Button>
+      {success !== "" && <p>{success}</p>}
+      {err !== "" && <p>{err}</p>}
     </>
   );
 };
