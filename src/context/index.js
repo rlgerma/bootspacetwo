@@ -82,24 +82,18 @@ export const UserProvider = ({ children }) => {
       });
     });
   };
-  const getPosts = async () => {
+  const getPosts = async (arr) => {
     try {
-      return await db
-        .collection("feed")
-        .get()
-        .then((snap) =>
-          (async (snap, arr) => {
-            for await (let doc of snap) {
-              arr.push(doc.data());
-            }
-            return arr;
-          })(snap, []).then((posts) =>
-            dispatch({
-              type: SET_POSTS,
-              payload: posts,
-            })
-          )
-        );
+      const postsRef = await db.collection("feed").get();
+
+      for await (let post of postsRef) {
+        arr.push(post.data());
+      }
+
+      return dispatch({
+        type: SET_POSTS,
+        payload: arr,
+      });
     } catch (error) {
       console.error(error);
     }

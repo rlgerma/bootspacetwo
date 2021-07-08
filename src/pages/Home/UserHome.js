@@ -19,7 +19,7 @@ const UserHome = () => {
   const { TabPane } = Tabs;
   useEffect(() => {
     if (!posts) {
-      functions.getPosts();
+      functions.getPosts([]);
     }
     if (userDoc) {
       (async () =>
