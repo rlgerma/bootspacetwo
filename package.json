@@ -14,7 +14,7 @@
     "antd": "4.16.6",
     "dayjs": "^1.10.6",
     "dotenv": "^10.0.0",
-    "firebase": "^8.7.0",
+    "firebase": "^8.7.1",
     "node-sass": "6.0.1",
     "pipeless": "^1.0.7",
     "react": "^16.13.0",
