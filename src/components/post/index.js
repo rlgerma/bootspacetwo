@@ -23,6 +23,7 @@ const Post = ({ user }) => {
             content: post,
             date: firestore.FieldValue.serverTimestamp(),
             likes: 0,
+            dislikes: 0,
             comments: [],
           })
           .then((doc) =>
