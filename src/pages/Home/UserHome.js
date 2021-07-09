@@ -17,6 +17,7 @@ const UserHome = () => {
   const [loaded, setLoaded] = useState(false);
   const [feed, setFeed] = useState([]);
   const { TabPane } = Tabs;
+
   useEffect(() => {
     if (!posts) {
       functions.getPosts([]);

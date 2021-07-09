@@ -86,7 +86,7 @@ export const UserProvider = ({ children }) => {
     try {
       const postsRef = await db.collection("feed").get();
 
-      for await (let post of postsRef) {
+      for await (let post of postsRef.docs) {
         arr.push(post.data());
       }
 
