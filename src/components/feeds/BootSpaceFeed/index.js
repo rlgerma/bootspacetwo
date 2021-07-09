@@ -1,31 +1,29 @@
 import React from "react";
 import dayjs from "dayjs";
+import * as relativeTime from "dayjs/plugin/relativeTime";
 import { Comment, Tooltip, Avatar, Skeleton } from "antd";
 
 const BootSpaceFeed = ({ feed }) => {
-  console.log(feed);
+  const convertTime = (ref) =>
+    new Date(ref.seconds * 1000 + ref.nanoseconds / 1000000);
+
+  const relTime = dayjs.extend(relativeTime);
+
   return feed ? (
     <>
-      {feed.map((post, index) => (
+      {feed.posts.reverse().map((post, index) => (
         <Comment
           key={index}
-          author='Han Solo'
-          avatar={
-            <Avatar
-              src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-              alt='Han Solo'
-            />
-          }
-          content={
-            <p>
-              We supply a series of design principles, practical patterns and
-              high quality design resources (Sketch and Axure), to help people
-              create their product prototypes beautifully and efficiently.
-            </p>
-          }
+          author={post.author}
+          avatar={<Avatar src={`${post.avatar}`} alt={post.author} />}
+          content={post.content}
           datetime={
-            <Tooltip title={dayjs().format("YYYY-MM-DD HH:mm:ss")}>
-              <span></span>
+            <Tooltip
+              title={dayjs(convertTime(post.date)).format(
+                "YYYY-MM-DD HH:mm:ss"
+              )}
+            >
+              <span>{relTime(convertTime(post.date)).fromNow(true)} ago</span>
             </Tooltip>
           }
         />
