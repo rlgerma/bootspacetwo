@@ -1,27 +1,24 @@
 import React from "react";
-import { Spin } from "antd";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
+import { LoadingPost } from "../GitHubFeed";
 
 const TwitterFeed = ({ twitter }) => {
   return (
-    <section
-      className='twitterContainer'
-      style={{ margin: "2.5% auto", textAlign: "center" }}
-    >
+    <section className='twitterContainer'>
       <div className='twitter-embed'>
         <TwitterTimelineEmbed
           sourceType='profile'
           screenName={`${twitter}`}
           options={{
-            tweetLimit: "10",
+            tweetLimit: "30",
             width: "75%",
-            height: "auto",
+            height: "200",
           }}
           theme='light'
           noHeader={true}
           noBorders={true}
           noFooter={true}
-          placeholder={<Spin />}
+          placeholder={<LoadingPost />}
         />
       </div>
     </section>

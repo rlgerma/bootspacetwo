@@ -44,8 +44,8 @@ export const UserProvider = ({ children }) => {
                 firstName,
                 lastName,
                 profilePic: res.additionalUserInfo.profile.avatar_url,
-                ...res.additionalUserInfo.profile,
                 token: res.credential.accessToken,
+                ...res.additionalUserInfo.profile,
               },
               { merge: true }
             )
@@ -58,8 +58,8 @@ export const UserProvider = ({ children }) => {
           .set(
             {
               profilePic: res.additionalUserInfo.profile.avatar_url,
-              ...res.additionalUserInfo.profile,
               token: res.credential.accessToken,
+              ...res.additionalUserInfo.profile,
             },
             { merge: true }
           )
@@ -70,24 +70,29 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const getUserDocument = (uid) => {
-    const userRef = db.doc(`users/${uid}`);
+  const getUserDocument = async (uid) => {
+    try {
+      const userRef = await db.doc(`users/${uid}`).get();
 
-    if (!uid) return null;
-
-    userRef.onSnapshot((snap) => {
-      dispatch({
-        type: SET_USER,
-        payload: snap.data(),
-      });
-    });
+      if (!uid || !userRef.exists) {
+        return null;
+      } else {
+        return dispatch({
+          type: SET_USER,
+          payload: userRef.data(),
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   const getPosts = async (arr) => {
     try {
       const postsRef = await db.collection("feed").get();
 
       for await (let post of postsRef.docs) {
-        arr.push(post.data());
+        arr.push({ data: post.data(), id: post.ref.id });
       }
 
       return dispatch({
