@@ -17,20 +17,29 @@ const Profile = () => {
   const userDoc = user?.userDoc;
 
   useEffect(() => {
-    if ([userDoc?.followers_url, userDoc?.token].some((u) => u === undefined)) {
-      functions.getUserDocument(authUser.uid).then(() => setLoaded(true));
-    } else {
-      (async () =>
-        await fetch(`${userDoc.followers_url}`, {
-          headers: {
-            Authorization: `token ${userDoc.token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((json) => setFriends(json))
-          .then(() => setLoaded(true))
-          .catch((error) => console.error(error)))();
-    }
+    (async () => {
+      try {
+        if (
+          [userDoc?.followers_url, userDoc?.token].some((u) => u === undefined)
+        ) {
+          await functions
+            .getUserDocument(authUser.uid)
+            .then(() => setLoaded(true));
+        } else {
+          await fetch(`${userDoc.followers_url}`, {
+            headers: {
+              Authorization: `token ${userDoc.token}`,
+            },
+          })
+            .then((res) => res.json())
+            .then((json) => setFriends(json))
+            .then(() => setLoaded(true))
+            .catch((error) => console.error(error));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, [authUser.uid, functions, userDoc]);
 
   return (

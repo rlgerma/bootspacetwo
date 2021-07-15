@@ -19,14 +19,13 @@ const BootSpaceFeed = ({ feed, actions }) => {
 
   const userActions = (post) => actionState.some((i) => i === post);
 
-  const unlike = async (post) =>
-    actionState.splice(actionState.indexOf(post), 1);
+  const unlike = (post) => actionState.splice(actionState.indexOf(post), 1);
 
   const convertTime = (ref) =>
     new Date(ref.seconds * 1000 + ref.nanoseconds / 1000000);
 
   const relTime = dayjs.extend(relativeTime);
-  console.log(actionState);
+
   const postAction = async (event, action, post) => {
     try {
       event.preventDefault();
