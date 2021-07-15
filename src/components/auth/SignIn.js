@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { UserContext } from "../../context";
 import { auth, gitHubProvider } from "../../firebase";
@@ -9,7 +9,7 @@ import fig from "../../assets/images/login-fig.jpeg";
 const Login = () => {
   const { functions, authUser } = useContext(UserContext);
 
-  const signInWithGithub = useCallback(async () => {
+  const signInWithGithub = async () => {
     try {
       await auth
         .signInWithPopup(gitHubProvider)
@@ -18,7 +18,7 @@ const Login = () => {
     } catch (err) {
       console.error(err);
     }
-  }, [functions]);
+  };
 
   return authUser ? (
     <Redirect to='/' />
@@ -77,16 +77,7 @@ const Login = () => {
         </Col>
         <Col md={8} sm={24}>
           <Card title='Sign In' className='loginCard'>
-            <Button
-              onClick={() => {
-                try {
-                  signInWithGithub();
-                } catch (error) {
-                  console.error("Error signing in with Github", error);
-                }
-              }}
-              className='githubLogin'
-            >
+            <Button onClick={() => signInWithGithub()} className='githubLogin'>
               Sign In with GitHub <GithubFilled />
             </Button>
             <br />
