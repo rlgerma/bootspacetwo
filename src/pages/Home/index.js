@@ -5,12 +5,13 @@ import { UserContext } from "../../context";
 import UserHome from "./UserHome";
 
 import { Row, Col, Card } from "antd";
+
 import fig from "../../assets/images/home-fig.jpeg";
 
 const Home = () => {
   const { authUser } = useContext(UserContext);
 
-  return authUser !== null ? (
+  return authUser ? (
     <UserHome />
   ) : (
     <div className='home'>

@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import { db, auth, firestore } from "../firebase";
 import { useDispatch } from "react-redux";
 
-import { SET_USER, SET_POSTS } from "../redux/actions/";
+import { SET_USER, SET_POSTS, SET_ACTIONS } from "../redux/actions/";
 
 export const UserContext = createContext();
 
@@ -104,10 +104,33 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const getActions = async (uid, arr) => {
+    try {
+      const actionsRef = await db
+        .collection("users")
+        .doc(`${uid}`)
+        .collection("actions")
+        .get();
+
+      for await (let action of actionsRef.docs) {
+        let id = action.id;
+        arr.push({ [id]: action.data() });
+      }
+
+      return dispatch({
+        type: SET_ACTIONS,
+        payload: arr,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const functions = {
     generateUserDocument,
     getUserDocument,
     getPosts,
+    getActions,
   };
 
   if (pending) {

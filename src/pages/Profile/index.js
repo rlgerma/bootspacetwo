@@ -1,31 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+
 import { useSelector } from "react-redux";
-import { Card, Row, Col, Divider, Space, Skeleton } from "antd";
 import dayjs from "dayjs";
 
+import { UserContext } from "../../context";
+
+import { Card, Row, Col, Divider, Space, Skeleton } from "antd";
+
 const Profile = () => {
+  const { functions, authUser } = useContext(UserContext);
   const user = useSelector((state) => state.user);
-  const userDoc = user?.userDoc ?? null;
+
   const [loaded, setLoaded] = useState(false);
   const [friends, setFriends] = useState([]);
 
+  const userDoc = user?.userDoc;
+
   useEffect(() => {
-    (async () =>
-      await fetch(`${userDoc.followers_url}`, {
-        headers: {
-          Authorization: `token ${userDoc.token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((json) => setFriends(json))
-        .then(() => setLoaded(true))
-        .catch((error) => console.error(error)))();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if ([userDoc?.followers_url, userDoc?.token].some((u) => u === undefined)) {
+      functions.getUserDocument(authUser.uid).then(() => setLoaded(true));
+    } else {
+      (async () =>
+        await fetch(`${userDoc.followers_url}`, {
+          headers: {
+            Authorization: `token ${userDoc.token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((json) => setFriends(json))
+          .then(() => setLoaded(true))
+          .catch((error) => console.error(error)))();
+    }
+  }, [authUser.uid, functions, userDoc]);
 
   return (
     <div className='main'>
-      {userDoc !== null ? (
+      {userDoc ? (
         <div className='profilePage'>
           <Row>
             <Col className='profileLeft'>
