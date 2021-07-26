@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/charts": "^1.2.2",
+    "@ant-design/charts": "^1.2.3",
     "@ant-design/icons": "^4.6.2",
     "@craco/craco": "^6.2.0",
     "@octokit/rest": "^18.7.0",
