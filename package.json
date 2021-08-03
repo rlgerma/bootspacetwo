@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "brunch": "^4.0.0",
-    "eslint": "^7.31.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.21.5",
     "firebase-tools": "9.16.0",
     "first-input-delay": "^0.1.3",
