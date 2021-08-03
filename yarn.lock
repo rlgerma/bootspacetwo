@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ant-design/charts@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@ant-design/charts/-/charts-1.2.3.tgz#09d86e9c4575f46b9ec6be78df8607cdf90ff93b"
-  integrity sha512-ShBbohvs1vlLheUlm94rwdF7gorhh1KPeW1ix9dy8P3PC4Z/Mx/91cpc3p+7qlMRZKO8wLP5Lo6/P+lKfp070A==
+"@ant-design/charts@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@ant-design/charts/-/charts-1.2.4.tgz#de5fff056d468e8ddb879754f56c03d2150ba22f"
+  integrity sha512-vPdIZp/L9BUU3FYHVOApRQkfBvWZA9Ayo+a8r7A5vAJNcVW8ybfSWc748HyTXblLk0vFqUGc9wzXInvoy73V/Q==
   dependencies:
     "@antv/g2plot" "^2.2.11"
     "@antv/g6" "^4.2.4"
