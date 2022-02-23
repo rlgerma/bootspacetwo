@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router";
-import { UserContext } from "../../context";
+import { UserContext } from "../../redux/context";
 import { auth, gitHubProvider } from "../../firebase";
 import { GithubFilled } from "@ant-design/icons";
 import { Card, Row, Col, Button, Tooltip } from "antd";

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import App from "./app";
 
 import { Provider as StateProvider } from "react-redux";
-import { UserProvider } from "./context";
+import { UserProvider } from "./redux/context";
 
 import store from "./redux/store";
 import "./styles/main.less";
