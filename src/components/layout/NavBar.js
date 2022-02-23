@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { auth } from "../../firebase";
-import { UserContext } from "../../context";
+import { UserContext } from "../../redux/context";
 import { Link } from "react-router-dom";
 import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
 import {

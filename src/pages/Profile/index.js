@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
-import { UserContext } from "../../context";
+import { UserContext } from "../../redux/context";
 
 import { Card, Row, Col, Divider, Space, Skeleton } from "antd";
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../context";
+import { UserContext } from "../redux/context";
 import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ component: RouteComponent, ...rest }) => {
@@ -10,11 +10,7 @@ const ProtectedRoute = ({ component: RouteComponent, ...rest }) => {
       <Route
         {...rest}
         render={(routeProps) =>
-          authUser ? (
-            <RouteComponent {...routeProps} />
-          ) : (
-            <Redirect to='/login' />
-          )
+          authUser ? <RouteComponent {...routeProps} /> : <Redirect to='/login' />
         }
       />
     </>

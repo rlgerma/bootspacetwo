@@ -23,6 +23,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
   "compileOnSave": true,
-  "include": ["src/**/*", "craco.config.js"],
+  "include": ["src/**/*", "craco.config.js", "./typings/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
