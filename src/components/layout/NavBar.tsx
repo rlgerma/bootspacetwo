@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import { FC, useContext } from "react";
 import { auth } from "../../firebase";
 import { UserContext } from "../../redux/context";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Input, Select, AutoComplete, Card, Col, Row } from "antd";
 import {
   HomeOutlined,
@@ -12,7 +12,7 @@ import {
 } from "@ant-design/icons";
 import logo from "../../assets/images/BootSpaceTrans.png";
 
-const NavBar = () => {
+const NavBar: FC = () => {
   const { Option } = Select;
   const { authUser } = useContext(UserContext);
   return (
@@ -20,9 +20,9 @@ const NavBar = () => {
       <Card>
         <Row>
           <Col md={8} sm={24}>
-            <Link to='/'>
+            <NavLink to='/'>
               <img src={logo} alt='bootspace' className='logo' />
-            </Link>
+            </NavLink>
           </Col>
           <Col md={8} sm={24} />
           <Col md={8} sm={24}>
@@ -40,25 +40,25 @@ const NavBar = () => {
           <Col md={16} sm={24} />
           <Col md={8} sm={24}>
             <div className='navLinks'>
-              <Link to='/'>
+              <NavLink to='/'>
                 <HomeOutlined /> home
-              </Link>
+              </NavLink>
               {authUser && (
-                <Link to='/profile'>
+                <NavLink to='/profile'>
                   <UserOutlined /> profile
-                </Link>
+                </NavLink>
               )}
-              <Link to='/blog'>
+              <NavLink to='/blog'>
                 <ReadOutlined /> blog
-              </Link>
+              </NavLink>
               {authUser ? (
-                <Link to='/' onClick={() => auth.signOut()}>
+                <NavLink to='/' onClick={() => auth.signOut()}>
                   <LogoutOutlined /> log-out
-                </Link>
+                </NavLink>
               ) : (
-                <Link to='/login'>
+                <NavLink to='/login'>
                   <LoginOutlined /> login
-                </Link>
+                </NavLink>
               )}
             </div>
           </Col>

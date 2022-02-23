@@ -1,7 +1,7 @@
-import React from "react";
+import { FC } from "react";
 import { Card, Row, Layout } from "antd";
 
-export default function Blog() {
+const Blog: FC = () => {
   const { Content } = Layout;
 
   return (
@@ -13,4 +13,6 @@ export default function Blog() {
       </Row>
     </Content>
   );
-}
+};
+
+export default Blog;
