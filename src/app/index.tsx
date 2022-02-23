@@ -23,12 +23,11 @@ const App: FC = () => {
         <Layout.Content style={{ paddingBottom: "2.5rem" }}>
           <NavBar />
           {authUser ? (
-            <ProtectedRoute component={UserHome} path='/' />
+            <ProtectedRoute component={UserHome} exact path='/' />
           ) : (
             <Route component={Home} exact path='/' />
           )}
           <ProtectedRoute component={Profile} exact path='/profile' />
-
           <Route component={Login} exact path='/login' />
           <Route component={Blog} exact path='/blog' />
         </Layout.Content>
