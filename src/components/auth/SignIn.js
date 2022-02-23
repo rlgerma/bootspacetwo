@@ -42,9 +42,8 @@ const Login = () => {
                     lineHeight: "3.5vh",
                   }}
                 >
-                  BootSpace is built on your work from GitHub. We use the GitHub
-                  API to help build your profile so you can connect with other
-                  BootSpace users.
+                  BootSpace is built on your work from GitHub. We use the GitHub API to help build
+                  your profile so you can connect with other BootSpace users.
                 </p>
                 <p
                   style={{
@@ -55,8 +54,8 @@ const Login = () => {
                   }}
                 >
                   {" "}
-                  We only can only access your public information and can not,
-                  nor will we create/modify/delete any repositories of yours.
+                  We only can only access your public information and can not, nor will we
+                  create/modify/delete any repositories of yours.
                 </p>
                 <p
                   style={{
@@ -67,9 +66,8 @@ const Login = () => {
                   }}
                 >
                   {" "}
-                  BootSpace is not endorsed, sponsored, or approved by GitHub
-                  and is solely a independent application for social networking
-                  purposes
+                  BootSpace is not endorsed, sponsored, or approved by GitHub and is solely a
+                  independent application for social networking purposes
                 </p>
               </Col>
             </Row>
@@ -84,7 +82,7 @@ const Login = () => {
             <img src={fig} alt='figure' style={{ width: "75%" }} />
             <br />
             <Tooltip title='Whats GitHub?'>
-              <a href='https://github.com/join'>Don't have a GitHub account?</a>
+              <a href='https://github.com/join'>Don&apos;t have a GitHub account?</a>
             </Tooltip>
           </Card>
         </Col>

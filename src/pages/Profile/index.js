@@ -19,12 +19,8 @@ const Profile = () => {
   useEffect(() => {
     (async () => {
       try {
-        if (
-          [userDoc?.followers_url, userDoc?.token].some((u) => u === undefined)
-        ) {
-          await functions
-            .getUserDocument(authUser.uid)
-            .then(() => setLoaded(true));
+        if ([userDoc?.followers_url, userDoc?.token].some((u) => u === undefined)) {
+          await functions.getUserDocument(authUser.uid).then(() => setLoaded(true));
         } else {
           await fetch(`${userDoc.followers_url}`, {
             headers: {
@@ -86,12 +82,7 @@ const Profile = () => {
                 <p>
                   Website: {userDoc.blog}
                   <br />
-                  <a
-                    href={`https://github.com/${userDoc.login}?tab=repositories`}
-                  >
-                    Repos
-                  </a>{" "}
-                  |{" "}
+                  <a href={`https://github.com/${userDoc.login}?tab=repositories`}>Repos</a> |{" "}
                   <a href={`https://gist.github.com/${userDoc.login}`}>Gists</a>
                 </p>
                 <div className='userUrl'>
@@ -105,7 +96,7 @@ const Profile = () => {
               </Card>{" "}
               <Card>
                 <Divider orientation='center' plain>
-                  {userDoc.name}'s followers
+                  {userDoc.name}&apos;s followers
                 </Divider>
                 <div className='friendList'>
                   {loaded ? (
