@@ -17,7 +17,7 @@ const Profile: FC = () => {
   const userDoc = user?.userDoc;
 
   useEffect(() => {
-    (async () => {
+    (async function () {
       try {
         if ([userDoc?.ghMeta.followers_url, userDoc?.token].some((u) => u === undefined)) {
           await functions.getUserDocument(authUser.uid).then(() => setLoaded(true));

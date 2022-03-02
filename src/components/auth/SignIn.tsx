@@ -1,28 +1,30 @@
-import React, { useContext } from "react";
-import { Redirect } from "react-router";
+import { FC, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../redux/context";
 import { auth, gitHubProvider } from "../../firebase";
 import { GithubFilled } from "@ant-design/icons";
 import { Card, Row, Col, Button, Tooltip } from "antd";
 import fig from "../../assets/images/login-fig.jpeg";
 
-const Login = () => {
-  const { functions, authUser } = useContext(UserContext);
+const Login: FC = () => {
+  const { functions } = useContext(UserContext);
 
+  const navigate = useNavigate();
   const signInWithGithub = async () => {
     try {
       await auth
         .signInWithPopup(gitHubProvider)
-        .then((res) => functions.generateUserDocument(res))
+        .then(async function (res) {
+          await functions.generateUserDocument(res);
+          navigate("/");
+        })
         .catch((error) => console.error(error));
     } catch (err) {
       console.error(err);
     }
   };
 
-  return authUser ? (
-    <Redirect to='/' />
-  ) : (
+  return (
     <div className='signIn'>
       <Row>
         <Col md={16} sm={24}>
