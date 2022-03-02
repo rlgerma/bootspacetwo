@@ -3,7 +3,6 @@ import { RootStateOrAny, useSelector } from "react-redux";
 
 import { UserContext } from "../../redux/context";
 
-import Metrics from "../../components/metrics";
 import Post from "../../components/post";
 import GitHubFeed from "../../components/feeds/GitHubFeed";
 
@@ -23,9 +22,7 @@ const UserHome: FC = () => {
   const { TabPane } = Tabs;
 
   useEffect(() => {
-    if (!posts) {
-      functions.getPosts([]);
-    }
+    if (!posts) functions.getPosts([]);
 
     if (userDoc) {
       (async () =>
@@ -46,7 +43,6 @@ const UserHome: FC = () => {
   return loaded ? (
     <div className='dashboard'>
       <>
-        <Metrics />
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col className='gutter-row' span={6} offset={1} flex={2}>
             <Card>

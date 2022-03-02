@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { UserContext } from "../redux/context";
 
 const ProtectedRoute = ({ component: RouteComponent, ...rest }: any = {}): JSX.Element => {
@@ -11,7 +11,7 @@ const ProtectedRoute = ({ component: RouteComponent, ...rest }: any = {}): JSX.E
       <Route
         {...rest}
         render={(routeProps: JSX.IntrinsicAttributes) =>
-          authUser ? <RouteComponent {...routeProps} /> : <Redirect to='/login' />
+          authUser && <RouteComponent {...routeProps} />
         }
       />
     </>

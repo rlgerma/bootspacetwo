@@ -1,7 +1,5 @@
 import { FC, useContext } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import ProtectedRoute from "../protected";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Blog from "../pages/Blog";
@@ -10,7 +8,6 @@ import Profile from "../pages/Profile";
 import NavBar from "../components/layout/NavBar";
 import Login from "../components/auth/SignIn";
 
-import { Layout } from "antd";
 import { UserContext } from "../redux/context";
 import UserHome from "../pages/Home/UserHome";
 
@@ -19,19 +16,13 @@ const App: FC = () => {
 
   return (
     <Router>
-      <Layout className='layout'>
-        <Layout.Content style={{ paddingBottom: "2.5rem" }}>
-          <NavBar />
-          {authUser ? (
-            <ProtectedRoute component={UserHome} exact path='/' />
-          ) : (
-            <Route component={Home} exact path='/' />
-          )}
-          <ProtectedRoute component={Profile} exact path='/profile' />
-          <Route component={Login} exact path='/login' />
-          <Route component={Blog} exact path='/blog' />
-        </Layout.Content>
-      </Layout>
+      <NavBar />
+      <Routes>
+        <Route element={authUser ? <UserHome /> : <Home />} path='/' />
+        <Route element={<Profile />} path='/profile' />
+        <Route element={<Login />} path='/login' />
+        <Route element={<Blog />} path='/blog' />
+      </Routes>
     </Router>
   );
 };

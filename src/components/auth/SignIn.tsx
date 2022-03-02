@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { Redirect } from "react-router";
+import { FC, useContext } from "react";
+
 import { UserContext } from "../../redux/context";
 import { auth, gitHubProvider } from "../../firebase";
 import { GithubFilled } from "@ant-design/icons";
 import { Card, Row, Col, Button, Tooltip } from "antd";
 import fig from "../../assets/images/login-fig.jpeg";
 
-const Login = () => {
-  const { functions, authUser } = useContext(UserContext);
+const Login: FC = () => {
+  const { functions } = useContext(UserContext);
 
   const signInWithGithub = async () => {
     try {
@@ -20,9 +20,7 @@ const Login = () => {
     }
   };
 
-  return authUser ? (
-    <Redirect to='/' />
-  ) : (
+  return (
     <div className='signIn'>
       <Row>
         <Col md={16} sm={24}>
