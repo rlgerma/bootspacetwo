@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../redux/context";
 import { auth, gitHubProvider } from "../../firebase";
 import { GithubFilled } from "@ant-design/icons";
@@ -9,11 +9,15 @@ import fig from "../../assets/images/login-fig.jpeg";
 const Login: FC = () => {
   const { functions } = useContext(UserContext);
 
+  const navigate = useNavigate();
   const signInWithGithub = async () => {
     try {
       await auth
         .signInWithPopup(gitHubProvider)
-        .then((res) => functions.generateUserDocument(res))
+        .then(async function (res) {
+          await functions.generateUserDocument(res);
+          navigate("/");
+        })
         .catch((error) => console.error(error));
     } catch (err) {
       console.error(err);
