@@ -1,6 +1,8 @@
 # bootspace 2.0
 
-## Now, with Firebase
+[![Deploy to Firebase Hosting on PR](https://github.com/rlgerma/bootspacetwo/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/rlgerma/bootspacetwo/actions/workflows/firebase-hosting-pull-request.yml)
+
+## Commit to connections
 
 This is a new version of an old project I started with [Carina Ullman](https://github.com/carinalullman) that connects GitHub users on a social network platform. While GitHub is perfect in every way, we felt there was a need for a supplemental platform for its users to connect more to get to know each other on a more personal level.
 
