@@ -4,8 +4,6 @@ package-lock.json
 storage.rules
 firestore.rules
 firebase-debug.log
-.firebase
-.vscode
-firebase.json
+
 firestore.indexes.json
 node_modules
