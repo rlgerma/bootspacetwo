@@ -1,8 +1,12 @@
-import React from "react";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
+import { FC } from "react";
 import { LoadingPost } from "../GitHubFeed";
 
-const TwitterFeed = ({ twitter }) => {
+interface Props {
+  twitter: string;
+}
+
+const TwitterFeed: FC<Props> = ({ twitter }) => {
   return (
     <section className='twitterContainer'>
       <div className='twitter-embed'>

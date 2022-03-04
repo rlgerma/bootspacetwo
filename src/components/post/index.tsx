@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import { ChangeEvent, FC, MouseEvent, useState } from "react";
 import { auth, db, firestore } from "../../firebase";
 import { Input, Button, Skeleton } from "antd";
 
-const Post = ({ user }) => {
+interface Props {
+  user: {
+    firstName: string;
+    lastName: string;
+    avatar_url: string;
+  };
+}
+
+const Post: FC<Props> = ({ user }) => {
   const { TextArea } = Input;
   const [post, setPost] = useState("");
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
 
-  const submitPost = async (event, post) => {
+  const submitPost = async (
+    event: MouseEvent<HTMLElement, globalThis.MouseEvent>,
+    post: string
+  ) => {
     try {
       event.preventDefault();
       if (post === "") {
@@ -29,7 +40,7 @@ const Post = ({ user }) => {
           .then((doc) =>
             db
               .collection("users")
-              .doc(`${auth.currentUser.uid}`)
+              .doc(`${auth.currentUser?.uid}`)
               .collection("posts")
               .doc(`${doc.id}`)
               .set({ ref: doc.path })
@@ -46,7 +57,8 @@ const Post = ({ user }) => {
     }
   };
 
-  const handleInput = (event) => setPost(event.currentTarget.value);
+  const handleInput = (event: ChangeEvent<HTMLTextAreaElement>) =>
+    setPost(event.currentTarget.value);
 
   return !user ? (
     <Skeleton />
@@ -54,11 +66,7 @@ const Post = ({ user }) => {
     <>
       <h3>New post</h3>
 
-      <TextArea
-        rows={4}
-        onChange={(event) => handleInput(event)}
-        value={post}
-      />
+      <TextArea rows={4} onChange={(event) => handleInput(event)} value={post} />
 
       <Button onClick={(event) => submitPost(event, post)}>Post</Button>
       {success !== "" && <p>{success}</p>}
