@@ -1,6 +1,6 @@
 # bootspace 2.0
 
-[![Deploy to Firebase Hosting on PR](https://github.com/rlgerma/bootspacetwo/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/rlgerma/bootspacetwo/actions/workflows/firebase-hosting-pull-request.yml)
+[![Deploy to Firebase Hosting on merge](https://github.com/rlgerma/bootspacetwo/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/rlgerma/bootspacetwo/actions/workflows/firebase-hosting-merge.yml)
 
 ## Commit to connections
 
