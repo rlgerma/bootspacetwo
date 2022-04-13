@@ -17716,13 +17716,13 @@ wordwrap@0.0.2:
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
   integrity sha1-t5Zpu0LstAn4PVg8rVLKF+qhZD8=
 
-workbox-background-sync@6.5.1, workbox-background-sync@^6.5.1:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/workbox-background-sync/-/workbox-background-sync-6.5.1.tgz#df79c6a4a22945d8a44493a4947a6ed0f720ef86"
-  integrity sha512-T5a35fagLXQvV8Dr4+bDU+XYsP90jJ3eBLjZMKuCNELMQZNj+VekCODz1QK44jgoBeQk+vp94pkZV6G+e41pgg==
+workbox-background-sync@6.5.3, workbox-background-sync@^6.5.1:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-background-sync/-/workbox-background-sync-6.5.3.tgz#7c66c1836aeca6f3762dc48d17a1852a33b3168c"
+  integrity sha512-0DD/V05FAcek6tWv9XYj2w5T/plxhDSpclIcAGjA/b7t/6PdaRkQ7ZgtAX6Q/L7kV7wZ8uYRJUoH11VjNipMZw==
   dependencies:
     idb "^6.1.4"
-    workbox-core "6.5.1"
+    workbox-core "6.5.3"
 
 workbox-background-sync@^5.1.4:
   version "5.1.4"
@@ -17806,20 +17806,20 @@ workbox-core@6.5.1:
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.5.1.tgz#0dba3bccf883a46dfa61cc412eaa3cb09bb549e6"
   integrity sha512-qObXZ39aFJ2N8X7IUbGrJHKWguliCuU1jOXM/I4MTT84u9BiKD2rHMkIzgeRP1Ixu9+cXU4/XHJq3Cy0Qqc5hw==
 
-workbox-core@6.5.2, workbox-core@^6.4.1:
+workbox-core@6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.5.2.tgz#f5e06a22c6cb4651d3e13107443d972fdbd47364"
   integrity sha512-IlxLGQf+wJHCR+NM0UWqDh4xe/Gu6sg2i4tfZk6WIij34IVk9BdOQgi6WvqSHd879jbQIUgL2fBdJUJyAP5ypQ==
+
+workbox-core@6.5.3, workbox-core@^6.5.2:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.5.3.tgz#bca038a9ef0d7a634a6db2a60f45313ed22ac249"
+  integrity sha512-Bb9ey5n/M9x+l3fBTlLpHt9ASTzgSGj6vxni7pY72ilB/Pb3XtN+cZ9yueboVhD5+9cNQrC9n/E1fSrqWsUz7Q==
 
 workbox-core@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-5.1.4.tgz#8bbfb2362ecdff30e25d123c82c79ac65d9264f4"
   integrity sha512-+4iRQan/1D8I81nR2L5vcbaaFskZC2CL17TLbvWVzQ4qiF/ytOGF6XeV54pVxAvKUtkLANhk8TyIUMtiMw2oDg==
-
-workbox-core@^6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.5.2.tgz#f5e06a22c6cb4651d3e13107443d972fdbd47364"
-  integrity sha512-IlxLGQf+wJHCR+NM0UWqDh4xe/Gu6sg2i4tfZk6WIij34IVk9BdOQgi6WvqSHd879jbQIUgL2fBdJUJyAP5ypQ==
 
 workbox-expiration@^5.1.4:
   version "5.1.4"
@@ -17846,15 +17846,15 @@ workbox-google-analytics@^5.1.4:
     workbox-routing "^5.1.4"
     workbox-strategies "^5.1.4"
 
-workbox-google-analytics@^6.5.1:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/workbox-google-analytics/-/workbox-google-analytics-6.5.1.tgz#685224d439c1e7a943f8241d65e2a34ee95a4ba0"
-  integrity sha512-qZU46/h4dbionYT6Yk6iBkUwpiEzAfnO1W7KkI+AMmY7G9/gA03dQQ7rpTw8F4vWrG7ahTUGWDFv6fERtaw1BQ==
+workbox-google-analytics@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-google-analytics/-/workbox-google-analytics-6.5.3.tgz#cc8c3a61f449131660a4ed2f5362d9a3599b18fe"
+  integrity sha512-3GLCHotz5umoRSb4aNQeTbILETcrTVEozSfLhHSBaegHs1PnqCmN0zbIy2TjTpph2AGXiNwDrWGF0AN+UgDNTw==
   dependencies:
-    workbox-background-sync "6.5.1"
-    workbox-core "6.5.1"
-    workbox-routing "6.5.1"
-    workbox-strategies "6.5.1"
+    workbox-background-sync "6.5.3"
+    workbox-core "6.5.3"
+    workbox-routing "6.5.3"
+    workbox-strategies "6.5.3"
 
 workbox-navigation-preload@^5.1.4:
   version "5.1.4"
@@ -17907,12 +17907,19 @@ workbox-routing@6.5.1:
   dependencies:
     workbox-core "6.5.1"
 
-workbox-routing@6.5.2, workbox-routing@^6.4.1:
+workbox-routing@6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/workbox-routing/-/workbox-routing-6.5.2.tgz#e0ad46246ba51224fd57eff0dd46891b3220cb9a"
   integrity sha512-nR1w5PjF6IVwo0SX3oE88LhmGFmTnqqU7zpGJQQPZiKJfEKgDENQIM9mh3L1ksdFd9Y3CZVkusopHfxQvit/BA==
   dependencies:
     workbox-core "6.5.2"
+
+workbox-routing@6.5.3, workbox-routing@^6.4.1:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-routing/-/workbox-routing-6.5.3.tgz#a0a699d8cc90b5692bd3df24679acbbda3913777"
+  integrity sha512-DFjxcuRAJjjt4T34RbMm3MCn+xnd36UT/2RfPRfa8VWJGItGJIn7tG+GwVTdHmvE54i/QmVTJepyAGWtoLPTmg==
+  dependencies:
+    workbox-core "6.5.3"
 
 workbox-routing@^5.1.4:
   version "5.1.4"
@@ -17928,6 +17935,13 @@ workbox-strategies@6.5.1:
   dependencies:
     workbox-core "6.5.1"
 
+workbox-strategies@6.5.3, workbox-strategies@^6.5.2:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.5.3.tgz#4bea9a48fee16cf43766e0d8138296773c8a9783"
+  integrity sha512-MgmGRrDVXs7rtSCcetZgkSZyMpRGw8HqL2aguszOc3nUmzGZsT238z/NN9ZouCxSzDu3PQ3ZSKmovAacaIhu1w==
+  dependencies:
+    workbox-core "6.5.3"
+
 workbox-strategies@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-5.1.4.tgz#96b1418ccdfde5354612914964074d466c52d08c"
@@ -17935,13 +17949,6 @@ workbox-strategies@^5.1.4:
   dependencies:
     workbox-core "^5.1.4"
     workbox-routing "^5.1.4"
-
-workbox-strategies@^6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.5.2.tgz#56b02e6959c6391351011fc2e5b0829aff1ed859"
-  integrity sha512-fgbwaUMxbG39BHjJIs2y2X21C0bmf1Oq3vMQxJ1hr6y5JMJIm8rvKCcf1EIdAr+PjKdSk4ddmgyBQ4oO8be4Uw==
-  dependencies:
-    workbox-core "6.5.2"
 
 workbox-streams@^5.1.4:
   version "5.1.4"
