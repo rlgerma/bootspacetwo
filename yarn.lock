@@ -14992,7 +14992,7 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
-regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
+regenerator-runtime@^0.13.7:
   version "0.13.9"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
   integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
@@ -18068,12 +18068,12 @@ workbox-cacheable-response@^5.1.4:
   dependencies:
     workbox-core "^5.1.4"
 
-workbox-cacheable-response@^6.5.1:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/workbox-cacheable-response/-/workbox-cacheable-response-6.5.1.tgz#f71d0a75b3d6846e39594955e99ac42fd26f8693"
-  integrity sha512-3TdtH/luDiytmM+Cn72HCBLZXmbeRNJqZx2yaVOfUZhj0IVwZqQXhNarlGE9/k6U5Jelb+TtpH2mLVhnzfiSMg==
+workbox-cacheable-response@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/workbox-cacheable-response/-/workbox-cacheable-response-7.3.0.tgz#557b0f5fdfceb22fe243e3f19807c76a0ae646e3"
+  integrity sha512-eAFERIg6J2LuyELhLlmeRcJFa5e16Mj8kL2yCDbhWE+HUun9skRQrGIFVUagqWj4DMaaPSMWfAolM7XZZxNmxA==
   dependencies:
-    workbox-core "6.5.1"
+    workbox-core "7.3.0"
 
 workbox-core@6.5.1:
   version "6.5.1"
