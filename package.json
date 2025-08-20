@@ -70,7 +70,8 @@
     "deployTest": "./scripts/deploy_test.sh",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**\"",
-    "knit": "craco build",
+    "knit": "./scripts/build.sh",
+    "craco-build-internal": "craco build",
     "start": "craco start",
     "test": "craco test"
   },
